@@ -4,68 +4,198 @@ const props = defineProps<{ loading?: boolean }>()
 const emit = defineEmits<{ start: [payload: { locale: string; targetRole: string }] }>()
 const { locale, t } = useI18n()
 
-const targetRole = ref('frontend-mid')
+// ── Step 1: role selection ──────────────────────────────────────────────────
+const selectedRole = ref<string | null>(null)
 
-const roles = computed(() => [
-  { value: 'frontend-junior', label: t('interview.setup.role_junior'), icon: '🌱', sub: t('interview.setup.role_junior_sub') },
-  { value: 'frontend-mid',    label: t('interview.setup.role_mid'),    icon: '⚡', sub: t('interview.setup.role_mid_sub') },
-  { value: 'frontend-senior', label: t('interview.setup.role_senior'), icon: '🎯', sub: t('interview.setup.role_senior_sub') },
-])
+const roles = [
+  { value: 'frontend',         icon: '🖥️', titleKey: 'interviewRoles.frontend',         descKey: 'interviewRoles.frontendDesc' },
+  { value: 'backend',          icon: '⚙️', titleKey: 'interviewRoles.backend',          descKey: 'interviewRoles.backendDesc' },
+  { value: 'data-engineering', icon: '📊', titleKey: 'interviewRoles.dataEngineering',  descKey: 'interviewRoles.dataEngineeringDesc' },
+  { value: 'devops',           icon: '☁️', titleKey: 'interviewRoles.devops',           descKey: 'interviewRoles.devopsDesc' },
+  { value: 'fullstack',        icon: '🔄', titleKey: 'interviewRoles.fullstack',        descKey: 'interviewRoles.fullstackDesc' },
+]
 
-function handleStart() {
-  emit('start', { locale: locale.value, targetRole: targetRole.value })
+// ── Step 2: seniority + categories ─────────────────────────────────────────
+const selectedSeniority = ref<'junior' | 'senior'>('junior')
+const selectedCategories = ref<string[]>([])
+
+const domainCategories: Record<string, string[]> = {
+  frontend: ['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral'],
+  backend: ['backend-api', 'backend-language', 'backend-database', 'backend-system-design', 'backend-security', 'backend-performance'],
+  'data-engineering': ['data-sql', 'data-nosql', 'data-pipeline', 'data-warehouse', 'data-streaming', 'data-batch'],
+  devops: ['devops-container', 'devops-k8s', 'devops-cicd', 'devops-cloud', 'devops-monitoring', 'devops-iac'],
+  fullstack: ['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral', 'backend-api', 'backend-language', 'backend-database', 'backend-system-design', 'backend-security', 'backend-performance'],
 }
+
+// Frontend-only categories for fullstack split view
+const frontendCats = ['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral']
+const backendCats  = ['backend-api', 'backend-language', 'backend-database', 'backend-system-design', 'backend-security', 'backend-performance']
+
+watch(selectedRole, (role) => {
+  if (!role) return
+  selectedCategories.value = [...(domainCategories[role] ?? [])]
+})
+
+// Current domain's category list (flat, for non-fullstack)
+const currentCategories = computed(() =>
+  selectedRole.value ? (domainCategories[selectedRole.value] ?? []) : []
+)
+
+// ── Submission ──────────────────────────────────────────────────────────────
+function handleStart() {
+  if (!selectedRole.value) return
+  const targetRole = `${selectedRole.value}-${selectedSeniority.value}`
+  emit('start', { locale: locale.value, targetRole })
+}
+
+const canStart = computed(() => !!selectedRole.value && selectedCategories.value.length > 0)
 </script>
 
 <template>
   <div class="iv-card">
 
-      <!-- Header -->
-      <div class="iv-card-header">
-        <span class="iv-eyebrow">AI POWERED</span>
-        <h1 class="iv-title">{{ t('interview.setup.title') }}</h1>
-        <p class="iv-subtitle">{{ t('interview.setup.subtitle') }}</p>
+    <!-- Header -->
+    <div class="iv-card-header">
+      <span class="iv-eyebrow">AI POWERED</span>
+      <h1 class="iv-title">{{ t('interview.setup.title') }}</h1>
+      <p class="iv-subtitle">{{ t('interview.setup.subtitle') }}</p>
+    </div>
+
+    <div class="iv-divider" />
+
+    <!-- ── Step 1: Role Cards ─────────────────────────────────────────────── -->
+    <div class="iv-section">
+      <p class="iv-section-label">{{ t('interview.setup.role_label') }}</p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <button
+          v-for="role in roles"
+          :key="role.value"
+          type="button"
+          @click="selectedRole = role.value"
+          :class="[
+            'relative flex flex-col items-center gap-2 p-4 rounded-xl border-2 cursor-pointer transition-all duration-200',
+            selectedRole === role.value
+              ? 'border-indigo-500 bg-indigo-50 ring-2 ring-indigo-100'
+              : 'border-slate-200 bg-white hover:border-indigo-300 hover:shadow-md'
+          ]"
+        >
+          <span class="text-2xl mb-1">{{ role.icon }}</span>
+          <span class="text-sm font-semibold text-slate-800 leading-tight text-center">{{ t(role.titleKey) }}</span>
+          <span class="text-xs text-slate-500 text-center leading-tight">{{ t(role.descKey) }}</span>
+        </button>
       </div>
+    </div>
 
-      <div class="iv-divider" />
-
-      <!-- Role -->
-      <div class="iv-section">
-        <p class="iv-section-label">{{ t('interview.setup.role_label') }}</p>
-        <div class="iv-roles">
+    <!-- ── Step 2: Detail config (expands when role selected) ─────────────── -->
+    <Transition name="iv-step2">
+      <div
+        v-if="selectedRole"
+        class="mt-4 p-5 rounded-xl bg-slate-50 border border-slate-200"
+      >
+        <!-- Seniority -->
+        <p class="iv-section-label mb-2">{{ t('interviewSeniority.label') }}</p>
+        <div class="flex gap-2">
           <button
-            v-for="r in roles"
-            :key="r.value"
-            @click="targetRole = r.value"
-            :class="['iv-role', targetRole === r.value && 'iv-role--on']"
+            v-for="level in (['junior', 'senior'] as const)"
+            :key="level"
+            type="button"
+            @click="selectedSeniority = level"
+            :class="[
+              'px-4 py-2 rounded-full text-sm font-medium border-2 cursor-pointer transition-all',
+              selectedSeniority === level
+                ? 'border-indigo-500 bg-indigo-500 text-white'
+                : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-300'
+            ]"
           >
-            <span class="iv-role-icon">{{ r.icon }}</span>
-            <span class="iv-role-name">{{ r.label }}</span>
-            <span class="iv-role-sub">{{ r.sub }}</span>
+            {{ t(`interviewSeniority.${level}`) }}
           </button>
         </div>
+
+        <!-- Categories: fullstack split view -->
+        <template v-if="selectedRole === 'fullstack'">
+          <div class="mt-3 mb-2">
+            <p class="text-xs font-medium text-slate-400 mb-1">前端領域</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <label
+                v-for="cat in frontendCats"
+                :key="cat"
+                class="flex items-center gap-2 text-sm cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  :value="cat"
+                  v-model="selectedCategories"
+                  class="w-4 h-4 accent-indigo-500"
+                />
+                <span class="text-slate-700">{{ t(`categories.${cat}`) }}</span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <p class="text-xs font-medium text-slate-400 mb-1">後端領域</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <label
+                v-for="cat in backendCats"
+                :key="cat"
+                class="flex items-center gap-2 text-sm cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  :value="cat"
+                  v-model="selectedCategories"
+                  class="w-4 h-4 accent-indigo-500"
+                />
+                <span class="text-slate-700">{{ t(`categories.${cat}`) }}</span>
+              </label>
+            </div>
+          </div>
+        </template>
+
+        <!-- Categories: single domain view -->
+        <template v-else>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-3">
+            <label
+              v-for="cat in currentCategories"
+              :key="cat"
+              class="flex items-center gap-2 text-sm cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                :value="cat"
+                v-model="selectedCategories"
+                class="w-4 h-4 accent-indigo-500"
+              />
+              <span class="text-slate-700">{{ t(`categories.${cat}`) }}</span>
+            </label>
+          </div>
+        </template>
       </div>
+    </Transition>
 
-      <!-- Notice -->
-      <p class="iv-notice">{{ t('interview.setup.privacy_notice') }}</p>
+    <!-- Notice -->
+    <p class="iv-notice">{{ t('interview.setup.privacy_notice') }}</p>
 
-      <!-- CTA -->
-      <button :disabled="loading" @click="handleStart" class="iv-cta">
-        <span v-if="loading" class="iv-spin" />
-        <svg v-else class="iv-cta-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/>
-          <path d="M19 11a7 7 0 0 1-14 0H3a9 9 0 0 0 8 8.94V22h2v-2.06A9 9 0 0 0 21 11h-2z"/>
-        </svg>
-        {{ t('interview.setup.start_btn') }}
-      </button>
+    <!-- CTA -->
+    <button
+      :disabled="loading || !canStart"
+      @click="handleStart"
+      class="iv-cta"
+    >
+      <span v-if="loading" class="iv-spin" />
+      <svg v-else class="iv-cta-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/>
+        <path d="M19 11a7 7 0 0 1-14 0H3a9 9 0 0 0 8 8.94V22h2v-2.06A9 9 0 0 0 21 11h-2z"/>
+      </svg>
+      {{ t('interview.setup.start_btn') }}
+    </button>
 
-    </div>
+  </div>
 </template>
 
 <style scoped>
 .iv-card {
   width: 100%;
-  max-width: 480px;
+  max-width: 680px;
   background: #ffffff;
   border: 1px solid var(--color-border, #e2e8f0);
   border-radius: 20px;
@@ -100,7 +230,7 @@ function handleStart() {
   font-size: 0.8125rem;
   color: var(--color-text-muted, #64748b);
   line-height: 1.6;
-  max-width: 360px;
+  max-width: 420px;
   margin: 0 auto;
 }
 
@@ -110,7 +240,7 @@ function handleStart() {
   margin: 1.5rem 0;
 }
 
-.iv-section { margin-bottom: 1.5rem; }
+.iv-section { margin-bottom: 1rem; }
 
 .iv-section-label {
   font-size: 11px;
@@ -121,51 +251,6 @@ function handleStart() {
   margin-bottom: 10px;
 }
 
-.iv-roles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.iv-role {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 14px 8px;
-  border-radius: 12px;
-  border: 1.5px solid var(--color-border, #e2e8f0);
-  background: var(--color-bg, #f8fafc);
-  color: var(--color-text-muted, #64748b);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.iv-role:hover {
-  border-color: var(--color-border-hover, #a5b4fc);
-  color: var(--color-text-primary, #0f172a);
-}
-
-.iv-role--on {
-  border-color: var(--color-primary, #6366f1);
-  background: var(--color-primary-light, #eef2ff);
-  color: var(--color-primary, #6366f1);
-}
-
-.iv-role-icon { font-size: 1.25rem; line-height: 1; }
-
-.iv-role-name {
-  font-size: 11px;
-  font-weight: 600;
-  color: inherit;
-  line-height: 1.2;
-}
-
-.iv-role-sub {
-  font-size: 10px;
-  opacity: 0.7;
-}
-
 .iv-notice {
   font-size: 11px;
   color: var(--color-text-muted, #64748b);
@@ -174,6 +259,7 @@ function handleStart() {
   background: var(--color-bg, #f8fafc);
   border-radius: 8px;
   border: 1px solid var(--color-border, #e2e8f0);
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
 }
 
@@ -217,4 +303,15 @@ function handleStart() {
 }
 
 @keyframes iv-spin { to { transform: rotate(360deg); } }
+
+/* Step 2 expand transition */
+.iv-step2-enter-active,
+.iv-step2-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.iv-step2-enter-from,
+.iv-step2-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
 </style>

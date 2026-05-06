@@ -4,6 +4,7 @@ import { serverSupabaseServiceRole } from '#supabase/server'
 interface UpdateBody {
   category: string
   difficulty: string
+  domain?: string
   tags: string[]
   zh: { title: string; body_md: string }
   en: { title: string; body_md: string }
@@ -26,6 +27,7 @@ export default defineEventHandler(async (event) => {
     .update({
       category: body.category,
       difficulty: body.difficulty,
+      domain: body.domain ?? 'frontend',
       tags: body.tags ?? [],
       updated_at: new Date().toISOString(),
     })

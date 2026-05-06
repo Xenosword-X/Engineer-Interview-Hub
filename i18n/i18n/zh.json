@@ -64,10 +64,28 @@
     "web-vitals": "Web Vitals",
     "browser": "瀏覽器原理",
     "behavioral": "行為面試",
+    "backend-api": "API 設計",
+    "backend-language": "後端語言",
+    "backend-database": "資料庫",
+    "backend-system-design": "系統設計",
+    "backend-security": "安全性",
+    "backend-performance": "效能優化",
+    "data-sql": "SQL",
+    "data-nosql": "NoSQL",
+    "data-pipeline": "資料 Pipeline",
+    "data-warehouse": "資料倉儲",
+    "data-streaming": "串流處理",
+    "data-batch": "批次處理",
+    "devops-container": "容器化",
+    "devops-k8s": "Kubernetes",
+    "devops-cicd": "CI/CD",
+    "devops-cloud": "雲端平台",
+    "devops-monitoring": "監控與可觀測性",
+    "devops-iac": "基礎建設即程式碼",
     "count_label": "{count} 道題目"
   },
   "footer": {
-    "copyright": "Copyright © 2026 Wood All Rights Reserved · FE Interview Hub",
+    "copyright": "Copyright © 2026 Wood All Rights Reserved · Engineer Interview Hub",
     "github": "GitHub",
     "admin": "後台管理"
   },
@@ -198,5 +216,32 @@
       "session_aborted_title": "面試已中止",
       "session_aborted_desc": "此場次已中止（例如重新整理頁面），今日配額已使用。"
     }
+  },
+  "engineerHub": {
+    "tagline": "全端工程師面試題庫"
+  },
+  "domains": {
+    "all": "全部",
+    "frontend": "前端",
+    "backend": "後端",
+    "dataEngineering": "資料工程",
+    "devops": "DevOps"
+  },
+  "interviewRoles": {
+    "frontend": "前端工程師",
+    "backend": "後端工程師",
+    "dataEngineering": "資料工程師",
+    "devops": "DevOps / SRE",
+    "fullstack": "全端工程師",
+    "frontendDesc": "HTML、CSS、JavaScript、Vue/React、瀏覽器原理",
+    "backendDesc": "API 設計、資料庫、系統架構、安全性",
+    "dataEngineeringDesc": "SQL、Pipeline、資料倉儲、串流處理",
+    "devopsDesc": "容器化、CI/CD、雲端平台、可觀測性",
+    "fullstackDesc": "前後端整合、全端架構設計"
+  },
+  "interviewSeniority": {
+    "label": "經驗等級",
+    "junior": "初階（0-3 年）",
+    "senior": "資深（3 年以上）"
   }
 }

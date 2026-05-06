@@ -18,6 +18,7 @@ if (!question.value) {
 const slug       = ref(question.value.slug)
 const category   = ref(question.value.category)
 const difficulty = ref(question.value.difficulty)
+const domain     = ref<string>(question.value.domain ?? 'frontend')
 const tagsStr    = ref(((question.value.tags ?? []) as string[]).join(', '))
 
 const zhTrans = question.value.translations.find((t: any) => t.locale === 'zh') ?? { title: '', body_md: '' }
@@ -42,6 +43,7 @@ async function save() {
       body: {
         category:   category.value,
         difficulty: difficulty.value,
+        domain:     domain.value,
         tags:       tagsStr.value.split(',').map(s => s.trim()).filter(Boolean),
         zh:         zh.value,
         en:         en.value,
@@ -76,6 +78,7 @@ async function save() {
       :slug="slug"
       :category="category"
       :difficulty="difficulty"
+      :domain="domain"
       :tags="tagsStr"
       :zh="zh"
       :en="en"
@@ -83,6 +86,7 @@ async function save() {
       @update:slug="slug = $event"
       @update:category="category = $event"
       @update:difficulty="difficulty = $event"
+      @update:domain="domain = $event"
       @update:tags="tagsStr = $event"
       @update:zh="zh = $event"
       @update:en="en = $event"

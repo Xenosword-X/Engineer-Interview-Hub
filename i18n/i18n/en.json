@@ -64,10 +64,28 @@
     "web-vitals": "Web Vitals",
     "browser": "Browser Internals",
     "behavioral": "Behavioral Interview",
+    "backend-api": "API Design",
+    "backend-language": "Backend Language",
+    "backend-database": "Database",
+    "backend-system-design": "System Design",
+    "backend-security": "Security",
+    "backend-performance": "Performance",
+    "data-sql": "SQL",
+    "data-nosql": "NoSQL",
+    "data-pipeline": "Data Pipeline",
+    "data-warehouse": "Data Warehouse",
+    "data-streaming": "Stream Processing",
+    "data-batch": "Batch Processing",
+    "devops-container": "Containers",
+    "devops-k8s": "Kubernetes",
+    "devops-cicd": "CI/CD",
+    "devops-cloud": "Cloud Platforms",
+    "devops-monitoring": "Monitoring & Observability",
+    "devops-iac": "Infrastructure as Code",
     "count_label": "{count} Questions"
   },
   "footer": {
-    "copyright": "Copyright © 2026 Wood All Rights Reserved · FE Interview Hub",
+    "copyright": "Copyright © 2026 Wood All Rights Reserved · Engineer Interview Hub",
     "github": "GitHub",
     "admin": "Admin"
   },
@@ -198,5 +216,32 @@
       "session_aborted_title": "Interview Aborted",
       "session_aborted_desc": "This session was aborted (e.g., page was refreshed). Today's quota has been used."
     }
+  },
+  "engineerHub": {
+    "tagline": "Full-Stack Engineer Interview Hub"
+  },
+  "domains": {
+    "all": "All",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "dataEngineering": "Data Engineering",
+    "devops": "DevOps"
+  },
+  "interviewRoles": {
+    "frontend": "Frontend Engineer",
+    "backend": "Backend Engineer",
+    "dataEngineering": "Data Engineer",
+    "devops": "DevOps / SRE",
+    "fullstack": "Full-stack Engineer",
+    "frontendDesc": "HTML, CSS, JavaScript, Vue/React, browser internals",
+    "backendDesc": "API design, databases, system architecture, security",
+    "dataEngineeringDesc": "SQL, pipelines, data warehousing, stream processing",
+    "devopsDesc": "Containers, CI/CD, cloud platforms, observability",
+    "fullstackDesc": "Frontend + backend integration, full-stack architecture"
+  },
+  "interviewSeniority": {
+    "label": "Experience Level",
+    "junior": "Junior (0-3 years)",
+    "senior": "Senior (3+ years)"
   }
 }

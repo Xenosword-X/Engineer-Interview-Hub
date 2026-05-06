@@ -36,7 +36,7 @@ async function signOut() {
       >
         <!-- Header -->
         <div class="flex items-center justify-between px-5 h-14 border-b border-[--color-border]">
-          <span class="font-bold text-sm text-[--color-text-primary]">FE Interview Hub</span>
+          <span class="font-bold text-sm text-[--color-text-primary]">Engineer Interview Hub</span>
           <button
             @click="emit('close')"
             class="p-2 rounded-md text-[--color-text-secondary] hover:bg-slate-100 min-h-11 min-w-11 flex items-center justify-center"

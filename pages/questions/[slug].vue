@@ -100,7 +100,7 @@ const metaDescription = excerpt(question.value!.body_md, 155)
 const answerText = excerpt(question.value!.body_md, 500)
 
 useSeoMeta({
-  title: `${question.value!.title} | FE Interview Hub`,
+  title: `${question.value!.title} | Engineer Interview Hub`,
   description: metaDescription,
   ogTitle: question.value!.title,
   ogDescription: metaDescription,

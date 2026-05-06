@@ -6,6 +6,7 @@ defineI18nRoute(false)
 const slug       = ref('')
 const category   = ref('')
 const difficulty = ref('')
+const domain     = ref('frontend')
 const tagsStr    = ref('')
 const zh         = ref({ title: '', body_md: '' })
 const en         = ref({ title: '', body_md: '' })
@@ -39,6 +40,7 @@ async function save() {
         slug:       slug.value,
         category:   category.value,
         difficulty: difficulty.value,
+        domain:     domain.value,
         tags:       tagsStr.value.split(',').map(s => s.trim()).filter(Boolean),
         zh:         zh.value,
         en:         en.value,
@@ -73,6 +75,7 @@ async function save() {
       :slug="slug"
       :category="category"
       :difficulty="difficulty"
+      :domain="domain"
       :tags="tagsStr"
       :zh="zh"
       :en="en"
@@ -80,6 +83,7 @@ async function save() {
       @update:slug="slug = $event"
       @update:category="category = $event"
       @update:difficulty="difficulty = $event"
+      @update:domain="domain = $event"
       @update:tags="tagsStr = $event"
       @update:zh="zh = $event"
       @update:en="en = $event"

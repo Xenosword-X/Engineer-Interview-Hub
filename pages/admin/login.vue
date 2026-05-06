@@ -35,7 +35,7 @@ async function login() {
           ← 回到首頁
         </NuxtLink>
       </div>
-      <p class="text-xs text-slate-400 mb-6">FE Interview Hub 管理後台</p>
+      <p class="text-xs text-slate-400 mb-6">Engineer Interview Hub 管理後台</p>
 
       <div class="flex flex-col gap-4">
         <div>

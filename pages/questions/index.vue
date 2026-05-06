@@ -9,9 +9,9 @@ const { categories } = useCategories()
 const siteUrl = useSiteUrl()
 
 useSeoMeta({
-  title: `${t('questions.page_title')} | FE Interview Hub`,
+  title: `${t('questions.page_title')} | Engineer Interview Hub`,
   description: t('home.seo_description'),
-  ogTitle: `${t('questions.page_title')} | FE Interview Hub`,
+  ogTitle: `${t('questions.page_title')} | Engineer Interview Hub`,
   ogDescription: t('home.seo_description'),
   ogUrl: `${siteUrl}/${locale.value}/questions`,
   ogType: 'website',

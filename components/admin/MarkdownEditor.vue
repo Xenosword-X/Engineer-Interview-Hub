@@ -13,6 +13,7 @@ const props = defineProps<{
   slug: string
   category: string
   difficulty: string
+  domain: string
   tags: string
   isNew?: boolean
 }>()
@@ -23,6 +24,7 @@ const emit = defineEmits<{
   (e: 'update:slug', val: string): void
   (e: 'update:category', val: string): void
   (e: 'update:difficulty', val: string): void
+  (e: 'update:domain', val: string): void
   (e: 'update:tags', val: string): void
   (e: 'save'): void
   (e: 'cancel'): void
@@ -54,6 +56,12 @@ const previewHtml = computed(() => {
 
 const categories = ['javascript', 'vue', 'css', 'typescript', 'html', 'web-vitals', 'browser', 'behavioral']
 const difficulties = ['basic', 'intermediate', 'advanced']
+const domains = [
+  { value: 'frontend', label: 'Frontend' },
+  { value: 'backend', label: 'Backend' },
+  { value: 'data-engineering', label: 'Data Engineering' },
+  { value: 'devops', label: 'DevOps' },
+]
 
 function updateZhTitle(e: Event) {
   emit('update:zh', { ...props.zh, title: (e.target as HTMLInputElement).value })
@@ -74,7 +82,7 @@ function updateBody(e: Event) {
 <template>
   <div class="flex flex-col gap-5">
     <!-- Metadata row -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
       <div>
         <label class="text-xs font-medium text-slate-500 block mb-1">
           Slug <span class="text-slate-300">（新增時自動產生）</span>
@@ -110,6 +118,17 @@ function updateBody(e: Event) {
         >
           <option value="" disabled>請選擇…</option>
           <option v-for="d in difficulties" :key="d" :value="d">{{ d }}</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs font-medium text-slate-500 block mb-1">領域 *</label>
+        <select
+          :value="domain"
+          @change="emit('update:domain', ($event.target as HTMLSelectElement).value)"
+          class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+          <option value="" disabled>請選擇…</option>
+          <option v-for="d in domains" :key="d.value" :value="d.value">{{ d.label }}</option>
         </select>
       </div>
       <div>

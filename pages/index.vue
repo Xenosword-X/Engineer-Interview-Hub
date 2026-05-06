@@ -7,6 +7,29 @@ const localePath = useLocalePath()
 
 const { categories } = useCategories()
 
+const activeDomain = ref<'all' | 'frontend' | 'backend' | 'data-engineering' | 'devops'>('all')
+
+const DOMAIN_TABS = [
+  { key: 'all', labelKey: 'domains.all' },
+  { key: 'frontend', labelKey: 'domains.frontend' },
+  { key: 'backend', labelKey: 'domains.backend' },
+  { key: 'data-engineering', labelKey: 'domains.dataEngineering' },
+  { key: 'devops', labelKey: 'domains.devops' },
+] as const
+
+function getCategoryDomain(slug: string): string {
+  if (['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral'].includes(slug)) return 'frontend'
+  if (slug.startsWith('backend-')) return 'backend'
+  if (slug.startsWith('data-')) return 'data-engineering'
+  if (slug.startsWith('devops-')) return 'devops'
+  return 'frontend'
+}
+
+const filteredCategories = computed(() => {
+  if (activeDomain.value === 'all') return categories.value
+  return categories.value.filter(cat => getCategoryDomain(cat.key) === activeDomain.value)
+})
+
 import type { QuestionMeta } from '~/composables/useQuestions'
 
 const { data: allQuestions } = await useAsyncData(
@@ -42,7 +65,7 @@ useHead({
     innerHTML: JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'FE Interview Hub',
+      name: 'Engineer Interview Hub',
       url: `${siteUrl}/${locale.value}/`,
       description: t('home.seo_description'),
       inLanguage: locale.value === 'zh' ? 'zh-TW' : 'en-US',
@@ -71,7 +94,7 @@ useHead({
 
         <img
           src="~/assets/img/LOGO.png"
-          alt="FE Interview Hub"
+          alt="Engineer Interview Hub"
           class="iv-hero-logo h-100 w-auto"
         />
 
@@ -123,8 +146,26 @@ useHead({
             {{ t('home.view_all') }}
           </NuxtLink>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          <CategoryCard v-for="cat in categories" :key="cat.key" :category="cat" />
+
+        <!-- Domain Filter Tabs -->
+        <div class="flex items-center gap-1 overflow-x-auto pb-2 border-b border-slate-200 mb-6">
+          <button
+            v-for="tab in DOMAIN_TABS"
+            :key="tab.key"
+            :class="activeDomain === tab.key
+              ? 'px-3 py-1.5 rounded-full text-sm font-medium bg-indigo-500 text-white whitespace-nowrap cursor-pointer'
+              : 'px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 transition-colors whitespace-nowrap cursor-pointer'"
+            @click="activeDomain = tab.key"
+          >
+            {{ t(tab.labelKey) }}
+          </button>
+        </div>
+
+        <div v-if="filteredCategories.length === 0" class="py-12 text-center text-slate-400">
+          <p class="text-sm">{{ t(DOMAIN_TABS.find(tab => tab.key === activeDomain)?.labelKey ?? 'domains.all') }} 領域的題目即將上線</p>
+        </div>
+        <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <CategoryCard v-for="cat in filteredCategories" :key="cat.key" :category="cat" />
         </div>
       </section>
 

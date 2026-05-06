@@ -14,6 +14,7 @@ interface AdminQuestion {
   slug: string
   category: string
   difficulty: string
+  domain: string
   tags: string[]
   is_published: boolean
   created_at: string
@@ -27,6 +28,7 @@ const { data: questions, refresh } = await useAsyncData(
 
 const search         = ref('')
 const filterCategory = ref('')
+const domainFilter   = ref('all')
 const confirmDelete  = ref<string | null>(null)
 const deleting       = ref(false)
 const deleteError    = ref('')
@@ -41,7 +43,8 @@ const filtered = computed(() => {
       || q.slug.toLowerCase().includes(search.value.toLowerCase())
       || zhTitle.includes(search.value)
     const matchCat = !filterCategory.value || q.category === filterCategory.value
-    return matchSearch && matchCat
+    const matchDomain = domainFilter.value === 'all' || q.domain === domainFilter.value
+    return matchSearch && matchCat && matchDomain
   })
 })
 
@@ -92,6 +95,16 @@ async function deleteQuestion(id: string) {
         <option value="">所有分類</option>
         <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
       </select>
+      <select
+        v-model="domainFilter"
+        class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      >
+        <option value="all">所有領域</option>
+        <option value="frontend">Frontend</option>
+        <option value="backend">Backend</option>
+        <option value="data-engineering">Data Engineering</option>
+        <option value="devops">DevOps</option>
+      </select>
     </div>
 
     <!-- Delete error -->
@@ -105,6 +118,7 @@ async function deleteQuestion(id: string) {
             <th class="text-left px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Slug</th>
             <th class="text-left px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">分類</th>
             <th class="text-left px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">難度</th>
+            <th class="text-left px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Domain</th>
             <th class="text-left px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">已發布</th>
             <th class="px-4 py-3 w-28"></th>
           </tr>
@@ -114,6 +128,7 @@ async function deleteQuestion(id: string) {
             <td class="px-4 py-3 font-mono text-xs text-slate-600">{{ q.slug }}</td>
             <td class="px-4 py-3 text-slate-600">{{ q.category }}</td>
             <td class="px-4 py-3 text-slate-600">{{ q.difficulty }}</td>
+            <td class="px-4 py-3 text-slate-600">{{ q.domain ?? '—' }}</td>
             <td class="px-4 py-3">
               <span
                 :class="q.is_published ? 'text-green-600 bg-green-50' : 'text-slate-400 bg-slate-50'"
@@ -159,7 +174,7 @@ async function deleteQuestion(id: string) {
             </td>
           </tr>
           <tr v-if="filtered.length === 0">
-            <td colspan="5" class="px-4 py-10 text-center text-sm text-slate-400">
+            <td colspan="6" class="px-4 py-10 text-center text-sm text-slate-400">
               找不到題目
             </td>
           </tr>

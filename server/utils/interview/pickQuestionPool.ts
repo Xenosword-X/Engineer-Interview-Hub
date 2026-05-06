@@ -11,9 +11,22 @@ interface RawQuestion {
 // Lower rank = better fit for the role. The AI sees questions sorted by this,
 // so its top picks match the candidate's seniority by default.
 const ROLE_DIFFICULTY_RANK: Record<string, Record<string, number>> = {
-  'frontend-junior': { basic: 0, intermediate: 1, advanced: 3 },
-  'frontend-mid':    { intermediate: 0, basic: 1, advanced: 1 },
-  'frontend-senior': { advanced: 0, intermediate: 1, basic: 3 },
+  // Frontend (existing + new seniority format)
+  'frontend-junior':  { basic: 0, intermediate: 1, advanced: 3 },
+  'frontend-mid':     { intermediate: 0, basic: 1, advanced: 1 },
+  'frontend-senior':  { advanced: 0, intermediate: 1, basic: 3 },
+  // Backend
+  'backend-junior':   { basic: 0, intermediate: 1, advanced: 3 },
+  'backend-senior':   { advanced: 0, intermediate: 1, basic: 3 },
+  // Data Engineering
+  'data-engineering-junior':  { basic: 0, intermediate: 1, advanced: 3 },
+  'data-engineering-senior':  { advanced: 0, intermediate: 1, basic: 3 },
+  // DevOps
+  'devops-junior':    { basic: 0, intermediate: 1, advanced: 3 },
+  'devops-senior':    { advanced: 0, intermediate: 1, basic: 3 },
+  // Full-stack
+  'fullstack-junior': { basic: 0, intermediate: 1, advanced: 3 },
+  'fullstack-senior': { advanced: 0, intermediate: 1, basic: 3 },
 }
 
 function difficultyRank(role: string, difficulty: string): number {

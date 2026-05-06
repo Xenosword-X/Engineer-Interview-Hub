@@ -5,6 +5,7 @@ interface CreateBody {
   slug: string
   category: string
   difficulty: string
+  domain?: string
   tags: string[]
   zh: { title: string; body_md: string }
   en: { title: string; body_md: string }
@@ -25,6 +26,7 @@ export default defineEventHandler(async (event) => {
       slug: body.slug,
       category: body.category,
       difficulty: body.difficulty,
+      domain: body.domain ?? 'frontend',
       tags: body.tags ?? [],
     })
     .select('id')

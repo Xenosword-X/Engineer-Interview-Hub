@@ -72,7 +72,21 @@ function formatRecentDate(iso: string) {
 }
 
 function recentRoleLabel(targetRole: string) {
-  return t(`interview.setup.role_${targetRole.split('-')[1]}`)
+  // targetRole format: "{roleType}-{seniority}" where roleType may contain dashes (e.g. data-engineering)
+  // Extract roleType by stripping the last dash-separated segment (seniority)
+  const lastDash = targetRole.lastIndexOf('-')
+  if (lastDash === -1) return targetRole
+  const roleType = targetRole.slice(0, lastDash)
+  const roleKeyMap: Record<string, string> = {
+    'frontend': t('interviewRoles.frontend'),
+    'backend': t('interviewRoles.backend'),
+    'data-engineering': t('interviewRoles.dataEngineering'),
+    'devops': t('interviewRoles.devops'),
+    'fullstack': t('interviewRoles.fullstack'),
+  }
+  // Legacy fallback: old format was "frontend-mid/junior/senior"
+  if (roleType === 'frontend') return roleKeyMap['frontend']
+  return roleKeyMap[roleType] ?? roleType
 }
 
 function recentStatusLabel(status: string) {
@@ -199,7 +213,7 @@ function recentStatusLabel(status: string) {
   align-items: center;
   gap: 1rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 720px;
 }
 
 .iv-index-hist-btn {

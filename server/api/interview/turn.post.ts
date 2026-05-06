@@ -1,8 +1,9 @@
 // server/api/interview/turn.post.ts
 import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
 import OpenAI from 'openai'
-import { buildSystemPromptZh, buildSystemPromptEn } from '~/server/utils/interview/prompts'
 import { buildTurnMessages } from '~/server/utils/interview/buildTurnMessages'
+import { getDomain } from '~/server/utils/interview/domains/index'
+import { parseTargetRole } from '~/server/utils/interview/parseTargetRole'
 import { pickQuestionPool } from '~/server/utils/interview/pickQuestionPool'
 import { validateAndCoerce, planUpcomingTurn } from '~/server/utils/interview/validateAiResponse'
 import { parseTurnResponse } from '~/server/utils/interview/schemas'
@@ -64,7 +65,7 @@ export default defineEventHandler(async (event) => {
       file: audioFile,
       model: 'gpt-4o-mini-transcribe',
       language: locale === 'zh' ? 'zh' : 'en',
-      prompt: 'React, Vue, useState, Virtual DOM, SSR, Hydration, TypeScript, JavaScript',
+      prompt: getDomain(parseTargetRole(session.target_role).roleType).sttTerms.join(', '),
     })
     userTranscript = transcription.text ?? ''
   } catch (e) {
@@ -143,9 +144,11 @@ export default defineEventHandler(async (event) => {
   }
 
   // 11. Build system prompt + messages
-  const systemPrompt = locale === 'zh'
-    ? buildSystemPromptZh({ plan, targetRole: session.target_role, targetCategories: session.target_categories, questionPool, usedCategories })
-    : buildSystemPromptEn({ plan, targetRole: session.target_role, targetCategories: session.target_categories, questionPool, usedCategories })
+  const domain = getDomain(parseTargetRole(session.target_role).roleType)
+  const systemPrompt = domain.systemPrompt(
+    { plan, targetRole: session.target_role, targetCategories: session.target_categories, questionPool, usedCategories },
+    locale
+  )
 
   const messages = buildTurnMessages(systemPrompt, turns, userTranscript)
 

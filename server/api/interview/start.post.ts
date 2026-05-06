@@ -2,7 +2,8 @@
 import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
 import OpenAI from 'openai'
 import { isWhitelisted, isQuotaExceeded } from '~/server/utils/interview/quotaCheck'
-import { GREETINGS } from '~/server/utils/interview/prompts'
+import { getDomain } from '~/server/utils/interview/domains/index'
+import { parseTargetRole } from '~/server/utils/interview/parseTargetRole'
 
 export default defineEventHandler(async (event) => {
   // 1. Auth
@@ -17,13 +18,15 @@ export default defineEventHandler(async (event) => {
   }>(event)
 
   if (!['zh', 'en'].includes(locale)) throw createError({ statusCode: 400, message: 'Invalid locale' })
-  if (!['frontend-junior', 'frontend-mid', 'frontend-senior'].includes(targetRole)) {
+  const VALID_ROLE_TYPES = ['frontend', 'backend', 'data-engineering', 'devops', 'fullstack']
+  const VALID_SENIORITIES = ['junior', 'mid', 'senior']
+  const { roleType, seniority } = parseTargetRole(targetRole)
+  if (!VALID_ROLE_TYPES.includes(roleType) || !VALID_SENIORITIES.includes(seniority)) {
     throw createError({ statusCode: 400, message: 'Invalid targetRole' })
   }
 
-  // Categories are no longer user-selectable — the AI samples from all 6 frontend
-  // areas to ensure variety across the 4 technical questions.
-  const targetCategories = ['javascript', 'react', 'vue', 'css', 'browser', 'web-vitals']
+  const domain = getDomain(roleType)
+  const targetCategories = domain.categories
 
   const config = useRuntimeConfig()
   const userEmail: string = (user as any)?.email ?? ''
@@ -70,7 +73,7 @@ export default defineEventHandler(async (event) => {
   if (sessionError || !session) throw createError({ statusCode: 500, message: 'Failed to create session' })
 
   // 6. Generate opening TTS (fixed greeting, no LLM call)
-  const greeting = GREETINGS[locale as 'zh' | 'en']
+  const greeting = domain.greeting[locale as 'zh' | 'en']
   const openai = new OpenAI({ apiKey: config.openaiApiKey as string })
 
   let aiAudioBase64 = ''

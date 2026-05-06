@@ -68,7 +68,7 @@ export default defineNuxtConfig({
 
   site: {
     url: SITE_URL,
-    name: 'FE Interview Hub',
+    name: 'Engineer Interview Hub',
   },
 
   sitemap: {

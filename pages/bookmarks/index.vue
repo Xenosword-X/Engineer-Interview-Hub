@@ -35,7 +35,7 @@ async function handleRemove(slug: string) {
 }
 
 useSeoMeta({
-  title: `${t('bookmark.page_title')} | FE Interview Hub`,
+  title: `${t('bookmark.page_title')} | Engineer Interview Hub`,
   ogUrl: `${siteUrl}/${locale.value}/bookmarks`,
 })
 useHead({
