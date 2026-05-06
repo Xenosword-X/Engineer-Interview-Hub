@@ -13,15 +13,21 @@ const en         = ref({ title: '', body_md: '' })
 const error      = ref('')
 const saving     = ref(false)
 
-// Auto-generate slug from zh title (only while slug is still empty)
+function toSlug(text: string): string {
+  return text.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-')
+}
+
+// Auto-generate slug from zh title; fall back to en title for CJK-only titles
 watch(() => zh.value.title, (title) => {
   if (!slug.value) {
-    const generated = title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .trim()
-      .replace(/\s+/g, '-')
-    // Only write the generated slug if it's non-empty (CJK titles produce empty strings)
+    const generated = toSlug(title)
+    if (generated) slug.value = generated
+  }
+})
+
+watch(() => en.value.title, (title) => {
+  if (!slug.value) {
+    const generated = toSlug(title)
     if (generated) slug.value = generated
   }
 })

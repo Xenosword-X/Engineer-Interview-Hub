@@ -36,7 +36,7 @@ function buildPhaseGuidanceEn(plan: UpcomingTurnPlan, usedCats: string[]): strin
 
 export const devopsDomain: DomainConfig = {
   roleType: 'devops',
-  categories: ['devops-container', 'devops-k8s', 'devops-cicd', 'devops-cloud', 'devops-monitoring', 'devops-iac'],
+  categories: ['containers', 'kubernetes', 'ci-cd', 'cloud', 'monitoring', 'infrastructure'],
   sttTerms: ['Docker, Kubernetes, Helm, Terraform, Ansible, Prometheus, Grafana, GitHub Actions, Jenkins, SLA, SLO, SLI, ELK Stack, AWS, GCP, Azure, blue-green deployment, canary release, Istio, ArgoCD'],
   pickStrategy: 'single-domain',
 

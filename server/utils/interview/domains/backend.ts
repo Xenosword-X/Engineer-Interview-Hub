@@ -50,7 +50,7 @@ function buildPhaseGuidanceEn(plan: UpcomingTurnPlan, usedCats: string[]): strin
 
 export const backendDomain: DomainConfig = {
   roleType: 'backend',
-  categories: ['backend-api', 'backend-language', 'backend-database', 'backend-system-design', 'backend-security', 'backend-performance'],
+  categories: ['api-design', 'language', 'database', 'system-design', 'security', 'performance'],
   sttTerms: ['REST, GraphQL, gRPC, JWT, OAuth, Redis, PostgreSQL, microservices, ACID, CAP theorem, Node.js, Python, FastAPI, Spring Boot, message queue, load balancer, horizontal scaling'],
   pickStrategy: 'single-domain',
 

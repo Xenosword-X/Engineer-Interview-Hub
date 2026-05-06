@@ -17,12 +17,23 @@ const DOMAIN_TABS = [
   { key: 'devops', labelKey: 'domains.devops' },
 ] as const
 
+const DOMAIN_CATEGORY_MAP: Record<string, string> = {
+  // frontend
+  javascript: 'frontend', vue: 'frontend', css: 'frontend', html: 'frontend',
+  'web-vitals': 'frontend', browser: 'frontend', behavioral: 'frontend',
+  // backend
+  'api-design': 'backend', language: 'backend', database: 'backend',
+  'system-design': 'backend', security: 'backend', performance: 'backend',
+  // data-engineering
+  sql: 'data-engineering', nosql: 'data-engineering', pipeline: 'data-engineering',
+  warehouse: 'data-engineering', streaming: 'data-engineering', 'batch-processing': 'data-engineering',
+  // devops
+  containers: 'devops', kubernetes: 'devops', 'ci-cd': 'devops',
+  cloud: 'devops', monitoring: 'devops', infrastructure: 'devops',
+}
+
 function getCategoryDomain(slug: string): string {
-  if (['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral'].includes(slug)) return 'frontend'
-  if (slug.startsWith('backend-')) return 'backend'
-  if (slug.startsWith('data-')) return 'data-engineering'
-  if (slug.startsWith('devops-')) return 'devops'
-  return 'frontend'
+  return DOMAIN_CATEGORY_MAP[slug] ?? 'frontend'
 }
 
 const filteredCategories = computed(() => {

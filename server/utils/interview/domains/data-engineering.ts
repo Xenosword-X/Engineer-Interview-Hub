@@ -41,7 +41,7 @@ function buildPhaseGuidanceEn(plan: UpcomingTurnPlan, usedCats: string[]): strin
 
 export const dataEngineeringDomain: DomainConfig = {
   roleType: 'data-engineering',
-  categories: ['data-sql', 'data-nosql', 'data-pipeline', 'data-warehouse', 'data-streaming', 'data-batch'],
+  categories: ['sql', 'nosql', 'pipeline', 'warehouse', 'streaming', 'batch-processing'],
   sttTerms: ['ETL, ELT, Spark, Kafka, Airflow, dbt, Snowflake, BigQuery, Parquet, Delta Lake, CDC, Redshift, Hadoop, HDFS, data lineage, schema registry, Apache Flink, data catalog'],
   pickStrategy: 'single-domain',
 

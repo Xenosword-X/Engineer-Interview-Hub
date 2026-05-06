@@ -5,14 +5,36 @@ const props = defineProps<{ category: Category }>()
 const localePath = useLocalePath()
 
 const iconBgMap: Record<string, string> = {
-  javascript:         'bg-amber-100  text-amber-700',
-  vue:                'bg-emerald-100 text-emerald-700',
-  css:                'bg-pink-100   text-pink-700',
-  'network-security': 'bg-blue-100   text-blue-700',
-  html:               'bg-orange-100 text-orange-700',
-  'web-vitals':       'bg-violet-100 text-violet-700',
-  browser:            'bg-sky-100    text-sky-700',
-  behavioral:         'bg-teal-100   text-teal-700',
+  // Frontend
+  javascript:          'bg-amber-100   text-amber-700',
+  vue:                 'bg-emerald-100 text-emerald-700',
+  css:                 'bg-pink-100    text-pink-700',
+  'network-security':  'bg-blue-100    text-blue-700',
+  html:                'bg-orange-100  text-orange-700',
+  'web-vitals':        'bg-violet-100  text-violet-700',
+  browser:             'bg-sky-100     text-sky-700',
+  behavioral:          'bg-teal-100    text-teal-700',
+  // Backend
+  'api-design':        'bg-indigo-100  text-indigo-700',
+  language:            'bg-cyan-100    text-cyan-700',
+  database:            'bg-rose-100    text-rose-700',
+  'system-design':     'bg-purple-100  text-purple-700',
+  security:            'bg-red-100     text-red-700',
+  performance:         'bg-lime-100    text-lime-700',
+  // Data Engineering
+  sql:                 'bg-yellow-100  text-yellow-700',
+  nosql:               'bg-fuchsia-100 text-fuchsia-700',
+  pipeline:            'bg-green-100   text-green-700',
+  warehouse:           'bg-amber-100   text-amber-800',
+  streaming:           'bg-sky-100     text-sky-800',
+  'batch-processing':  'bg-teal-100    text-teal-800',
+  // DevOps
+  containers:          'bg-blue-100    text-blue-700',
+  kubernetes:          'bg-violet-100  text-violet-800',
+  'ci-cd':             'bg-orange-100  text-orange-700',
+  cloud:               'bg-indigo-100  text-indigo-800',
+  monitoring:          'bg-emerald-100 text-emerald-800',
+  infrastructure:      'bg-slate-100   text-slate-700',
 }
 const iconClass = computed(() => iconBgMap[props.category.key] ?? 'bg-slate-100 text-slate-600')
 </script>
@@ -68,6 +90,7 @@ const iconClass = computed(() => iconBgMap[props.category.key] ?? 'bg-slate-100 
 }
 
 /* Per-category accent colours */
+/* Frontend */
 .iv-cat--javascript         { --cat-accent: #f59e0b; }
 .iv-cat--vue                { --cat-accent: #22c55e; }
 .iv-cat--css                { --cat-accent: #ec4899; }
@@ -76,6 +99,27 @@ const iconClass = computed(() => iconBgMap[props.category.key] ?? 'bg-slate-100 
 .iv-cat--web-vitals         { --cat-accent: #8b5cf6; }
 .iv-cat--browser            { --cat-accent: #0ea5e9; }
 .iv-cat--behavioral         { --cat-accent: #14b8a6; }
+/* Backend */
+.iv-cat--api-design         { --cat-accent: #6366f1; }
+.iv-cat--language           { --cat-accent: #06b6d4; }
+.iv-cat--database           { --cat-accent: #f43f5e; }
+.iv-cat--system-design      { --cat-accent: #a855f7; }
+.iv-cat--security           { --cat-accent: #ef4444; }
+.iv-cat--performance        { --cat-accent: #84cc16; }
+/* Data Engineering */
+.iv-cat--sql                { --cat-accent: #eab308; }
+.iv-cat--nosql              { --cat-accent: #d946ef; }
+.iv-cat--pipeline           { --cat-accent: #22c55e; }
+.iv-cat--warehouse          { --cat-accent: #f59e0b; }
+.iv-cat--streaming          { --cat-accent: #0ea5e9; }
+.iv-cat--batch-processing   { --cat-accent: #14b8a6; }
+/* DevOps */
+.iv-cat--containers         { --cat-accent: #3b82f6; }
+.iv-cat--kubernetes         { --cat-accent: #7c3aed; }
+.iv-cat--ci-cd              { --cat-accent: #f97316; }
+.iv-cat--cloud              { --cat-accent: #6366f1; }
+.iv-cat--monitoring         { --cat-accent: #10b981; }
+.iv-cat--infrastructure     { --cat-accent: #64748b; }
 
 .iv-cat-icon {
   width: 38px;

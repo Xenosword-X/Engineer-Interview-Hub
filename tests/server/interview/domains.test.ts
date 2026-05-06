@@ -13,19 +13,19 @@ describe('getDomain', () => {
   it('returns backend domain', () => {
     const d = getDomain('backend')
     expect(d.roleType).toBe('backend')
-    expect(d.categories).toContain('backend-api')
+    expect(d.categories).toContain('api-design')
   })
 
   it('returns data-engineering domain', () => {
     const d = getDomain('data-engineering')
     expect(d.roleType).toBe('data-engineering')
-    expect(d.categories).toContain('data-sql')
+    expect(d.categories).toContain('sql')
   })
 
   it('returns devops domain', () => {
     const d = getDomain('devops')
     expect(d.roleType).toBe('devops')
-    expect(d.categories).toContain('devops-k8s')
+    expect(d.categories).toContain('kubernetes')
   })
 
   it('returns fullstack composite domain', () => {
@@ -34,7 +34,7 @@ describe('getDomain', () => {
     expect(d.pickStrategy).toBe('composite')
     // should contain both frontend and backend categories
     expect(d.categories).toContain('javascript')
-    expect(d.categories).toContain('backend-api')
+    expect(d.categories).toContain('api-design')
   })
 
   it('all domains have greeting for zh and en', () => {
@@ -50,7 +50,7 @@ describe('getDomain', () => {
     const mockState = {
       plan: { phase: 'behavioral' as const, progressCurrent: 1, progressTotalInPhase: 3, isLastInPhase: false, isFinal: false },
       targetRole: 'backend-junior',
-      targetCategories: ['backend-api'],
+      targetCategories: ['api-design'],
     }
     for (const role of ['frontend', 'backend', 'data-engineering', 'devops', 'fullstack'] as const) {
       const d = getDomain(role)

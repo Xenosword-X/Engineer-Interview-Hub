@@ -54,7 +54,21 @@ const previewHtml = computed(() => {
   return myMarked.parse(preprocessMarkdown(md)) as string
 })
 
-const categories = ['javascript', 'vue', 'css', 'typescript', 'html', 'web-vitals', 'browser', 'behavioral']
+const DOMAIN_CATEGORIES: Record<string, string[]> = {
+  frontend:          ['javascript', 'vue', 'css', 'typescript', 'html', 'web-vitals', 'browser', 'behavioral'],
+  backend:           ['api-design', 'language', 'database', 'system-design', 'security', 'performance'],
+  'data-engineering':['sql', 'nosql', 'pipeline', 'warehouse', 'streaming', 'batch-processing'],
+  devops:            ['containers', 'kubernetes', 'ci-cd', 'cloud', 'monitoring', 'infrastructure'],
+}
+
+const categories = computed(() => DOMAIN_CATEGORIES[props.domain] ?? DOMAIN_CATEGORIES.frontend)
+
+watch(() => props.domain, () => {
+  if (!categories.value.includes(props.category)) {
+    emit('update:category', '')
+  }
+})
+
 const difficulties = ['basic', 'intermediate', 'advanced']
 const domains = [
   { value: 'frontend', label: 'Frontend' },
