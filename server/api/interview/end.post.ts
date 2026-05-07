@@ -52,6 +52,7 @@ export default defineEventHandler(async (event) => {
     .eq('session_id', sessionId)
     .order('turn_index', { ascending: true })
 
+  const locale = session.locale as 'zh' | 'en'
   const roleLabel = (role: string) => locale === 'zh'
     ? (role === 'assistant' ? '面試官' : '候選人')
     : (role === 'assistant' ? 'Interviewer' : 'Candidate')
@@ -62,7 +63,6 @@ export default defineEventHandler(async (event) => {
 
   const config = useRuntimeConfig()
   const openai = new OpenAI({ apiKey: config.openaiApiKey as string })
-  const locale = session.locale as 'zh' | 'en'
   const summaryPrompt = locale === 'zh' ? buildSummaryPromptZh() : buildSummaryPromptEn()
 
   let summary: ReturnType<typeof parseSummaryResponse>

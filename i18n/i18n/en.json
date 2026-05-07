@@ -185,7 +185,10 @@
       "status_speaking": "🔊 Interviewer is speaking, please wait",
       "status_error": "❌ Connection error",
       "finalizing_title": "Interview complete — generating your report",
-      "finalizing_desc": "Analyzing your conversation. This takes about 10–30 seconds."
+      "finalizing_desc": "Analyzing your conversation. This takes about 10–30 seconds.",
+      "finalizing_error_title": "Report generation failed",
+      "finalizing_error_desc": "Something went wrong. Your conversation is saved — you can try again.",
+      "finalizing_retry": "Try Again"
     },
     "phase": {
       "intro": "Introduction",

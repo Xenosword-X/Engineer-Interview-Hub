@@ -185,7 +185,10 @@
       "status_speaking": "🔊 面試官發言中，請稍候",
       "status_error": "❌ 連線錯誤",
       "finalizing_title": "面試結束，正在生成報告",
-      "finalizing_desc": "AI 正在分析你的整場對話，約 10–30 秒"
+      "finalizing_desc": "AI 正在分析你的整場對話，約 10–30 秒",
+      "finalizing_error_title": "報告生成失敗",
+      "finalizing_error_desc": "網路或伺服器異常，你的對話紀錄仍然保留。",
+      "finalizing_retry": "重新生成報告"
     },
     "phase": {
       "intro": "自我介紹",

@@ -36,6 +36,7 @@ watch(() => props.initialAudioBase64, (val) => {
 
 const showEndConfirm = ref(false)
 const isFinalizing = ref(false)
+const endFailed = ref(false)
 
 async function handleStartRecording() {
   if (!isSupported.value) return alert(t('interview.errors.no_mic'))
@@ -57,9 +58,8 @@ function handleEndClick() {
 }
 
 async function triggerEnd() {
-  // Show loading screen so the user knows the wrap-up audio finishing wasn't the
-  // end — server is still generating the summary (5-30s OpenAI call).
   isFinalizing.value = true
+  endFailed.value = false
   try {
     const s = await endInterview()
     if (s) {
@@ -68,12 +68,10 @@ async function triggerEnd() {
       // loading screen stays up until the swap completes, avoiding a flash back to
       // the recorder UI between summary arriving and view switching.
     } else {
-      // Failure path: drop back to the recorder so the user isn't stuck on loading.
-      isFinalizing.value = false
+      endFailed.value = true
     }
   } catch (e) {
-    isFinalizing.value = false
-    throw e
+    endFailed.value = true
   }
 }
 
@@ -125,9 +123,17 @@ async function confirmEnd() {
     <!-- Finalizing overlay — covers transcript while server generates summary -->
     <div v-if="isFinalizing" class="iv-finalizing">
       <div class="iv-finalizing-card">
-        <span class="iv-finalizing-spin" />
-        <h2 class="iv-finalizing-title">{{ t('interview.stage.finalizing_title') }}</h2>
-        <p class="iv-finalizing-desc">{{ t('interview.stage.finalizing_desc') }}</p>
+        <template v-if="endFailed">
+          <span class="iv-finalizing-error-icon">✕</span>
+          <h2 class="iv-finalizing-title">{{ t('interview.stage.finalizing_error_title') }}</h2>
+          <p class="iv-finalizing-desc">{{ t('interview.stage.finalizing_error_desc') }}</p>
+          <button class="iv-retry-btn" @click="triggerEnd">{{ t('interview.stage.finalizing_retry') }}</button>
+        </template>
+        <template v-else>
+          <span class="iv-finalizing-spin" />
+          <h2 class="iv-finalizing-title">{{ t('interview.stage.finalizing_title') }}</h2>
+          <p class="iv-finalizing-desc">{{ t('interview.stage.finalizing_desc') }}</p>
+        </template>
       </div>
     </div>
 
@@ -302,4 +308,33 @@ async function confirmEnd() {
 }
 
 @keyframes iv-spin { to { transform: rotate(360deg); } }
+
+.iv-finalizing-error-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fef2f2;
+  color: #ef4444;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.iv-retry-btn {
+  margin-top: 18px;
+  width: 100%;
+  padding: 11px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--color-primary, #6366f1);
+  color: #ffffff;
+  border: none;
+  transition: opacity 0.15s ease;
+}
+.iv-retry-btn:hover { opacity: 0.88; }
 </style>
