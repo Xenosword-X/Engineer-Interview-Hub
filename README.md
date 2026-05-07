@@ -1,6 +1,6 @@
-# Engineer Interview Hub — 前端工程師面試題庫
+# Engineer Interview Hub — 軟體工程師面試題庫
 
-> 精選 180+ 前端面試題，涵蓋 JavaScript / Vue / CSS / HTML / 瀏覽器原理 / Web Vitals / 行為面試，搭配 OpenAI 即時評分與完整 AI 模擬面試流程，幫你把「會答」練成「答好」。
+> 精選 185+ 道題目，涵蓋**前端 / 後端 / 資料工程 / DevOps** 四大領域、26 個分類，搭配 OpenAI 即時評分與完整 AI 模擬面試流程，幫你把「會答」練成「答好」。
 
 ![Engineer Interview Hub OG image](public/og-image.png)
 
@@ -15,10 +15,10 @@
 | 功能 | 說明 |
 |------|------|
 | **雙語題庫** | zh-TW / en-US 全站 i18n，題目 + UI 同時切換，各語系有獨立的 canonical URL 與 hreflang |
-| **分類瀏覽** | 8 大分類：JavaScript、Vue、CSS、HTML、Web Vitals、Browser 原理、行為面試，分類頁帶題目計數 |
+| **領域 × 分類瀏覽** | 4 大領域（前端 / 後端 / 資料工程 / DevOps）× 26 分類，側邊欄依領域切換，分類帶題目計數 |
 | **題目詳解** | Markdown 渲染，自動產生側欄 TOC、麵包屑、上下題導覽、Callout 語法支援 |
 | **AI 單題評分** | 輸入答案後呼叫 GPT-4o-mini 給 0-100 精準度分數、列出缺漏要點、產生優化後範例答案 |
-| **AI 模擬面試** | 完整模擬前端面試流程（intro → 行為題 → 4 題技術題 → wrapup），AI 擔任面試官，語音雙向互動，結束後生成評測報告 |
+| **AI 模擬面試** | 完整模擬工程師面試流程（intro → 行為題 → 4 題技術題 → wrapup），AI 擔任面試官，語音雙向互動，結束後生成評測報告 |
 | **語音作答** | 使用 `gpt-4o-mini-transcribe` 把中文/英文語音轉文字，AI 面試回覆透過 `tts-1` 合成語音播放 |
 | **每日次數限制** | 免費額度預設 10 次/人/日，白名單 email 無限制（AI 評分與 AI 面試共用計數） |
 | **面試歷史** | 登入後可查看所有歷史面試記錄與詳細評測報告 |
@@ -93,7 +93,10 @@
 questions
 ├── id            uuid primary key
 ├── slug          text unique
-├── category      text            -- javascript / vue / css / typescript / html / web-vitals / browser / behavioral
+├── category      text            -- javascript / vue / css / html / web-vitals / browser / behavioral / network-security
+│                                --   api-design / language / database / system-design / security / performance
+│                                --   sql-transformation / pipeline-orchestration / warehouse-modeling / batch-processing / stream-processing / data-quality-observability
+│                                --   containers-platform / infrastructure-as-code / delivery-automation / cloud-architecture / observability / reliability-sre
 ├── difficulty    text            -- basic / intermediate / advanced
 ├── tags          text[]
 ├── is_published  boolean
@@ -128,8 +131,8 @@ interview_sessions
 ├── id               uuid primary key
 ├── user_id          uuid → auth.users.id
 ├── locale           text            -- 'zh' or 'en'
-├── target_role      text            -- frontend-junior / frontend-mid / frontend-senior
-├── target_categories text[]         -- fixed to 6 frontend areas
+├── target_role      text            -- frontend-junior / frontend-mid / frontend-senior / backend-junior / backend-mid / backend-senior / ...
+├── target_categories text[]         -- 依所選領域的分類組成
 ├── phase            text            -- intro / behavioral / technical / wrapup / completed / aborted
 ├── status           text            -- active / completed / aborted / error
 ├── total_turns      int             -- running count of AI turns
@@ -347,7 +350,7 @@ create table interview_turns (
 │   └── question/                  # 題目卡片、分類卡、Tag Badge
 ├── composables/
 │   ├── useQuestions.ts            # 題目列表 + 過濾
-│   ├── useCategories.ts           # 8 大分類 + 題目計數
+│   ├── useCategories.ts           # 全領域 26 分類 + 題目計數
 │   ├── useBookmarks.ts            # 收藏 toggle
 │   ├── useInterviewSession.ts     # AI 模擬面試 state machine（turn 提交、音訊播放）
 │   ├── useVoiceInput.ts           # 麥克風錄音 + STT 上傳
@@ -426,7 +429,7 @@ create table interview_turns (
    - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) 預覽 OG 圖
    - Google Search Console 提交 `sitemap.xml`
 
-> 💡 `.pages.dev` 在 SEO 上屬於「免費託管子域名」，在競爭關鍵字上會被降權。想衝「前端面試題」第一頁建議買自訂域名，DNS 指到 Cloudflare Pages 即可（Cloudflare Pages 仍維持免費）。
+> 💡 `.pages.dev` 在 SEO 上屬於「免費託管子域名」，在競爭關鍵字上會被降權。想衝「工程師面試題」第一頁建議買自訂域名，DNS 指到 Cloudflare Pages 即可（Cloudflare Pages 仍維持免費）。
 
 ---
 
