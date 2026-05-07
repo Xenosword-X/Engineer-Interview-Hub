@@ -1,7 +1,7 @@
 // nuxt.config.ts
 import tailwindcss from '@tailwindcss/vite'
 
-const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL ?? 'https://fe-interview-hub.example.com'
+const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL ?? 'https://engineer-interview-hub.pages.dev'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
