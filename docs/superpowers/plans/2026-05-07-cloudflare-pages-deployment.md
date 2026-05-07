@@ -4,7 +4,7 @@
 
 **Goal:** Deploy Engineer Interview Hub to Cloudflare Pages with GitHub auto-deploy so every push to `main` triggers a production build.
 
-**Architecture:** Nuxt 3 SSR with `nitro.preset: 'cloudflare-pages'` already configured. CF Pages runs the Nitro-generated `_worker.js` from `.output/public/`. GitHub integration handles CI — push to `main` → CF Pages builds and deploys automatically.
+**Architecture:** Nuxt 3 SSR with `nitro.preset: 'cloudflare-pages'` already configured. CF Pages runs the Nitro-generated `_worker.js` from `dist/`. GitHub integration handles CI — push to `main` → CF Pages builds and deploys automatically.
 
 **Tech Stack:** Nuxt 3, Nitro (cloudflare-pages preset), Cloudflare Pages, Supabase Auth, Google OAuth
 
@@ -50,7 +50,7 @@ Run:
 npm run build
 ```
 
-Expected: Build completes without errors. Output directory `.output/public/` is created and contains `_worker.js`.
+Expected: Build completes without errors. Output directory `dist/` is created and contains `_worker.js`, `_routes.json`, `_headers`, `_redirects`.
 
 - [ ] **Step 4: Commit**
 
@@ -90,9 +90,9 @@ In the "Set up builds and deployments" screen, fill in:
 | Project name | `engineer-interview-hub` |
 | Framework preset | `None` |
 | Build command | `npm run build` |
-| Build output directory | `.output/public` |
+| Build output directory | `dist` |
 
-> ⚠️ Do NOT use `dist` — that is for `nuxt generate` (static mode). SSR with `cloudflare-pages` preset outputs to `.output/public`.
+> ⚠️ Must be `dist` — Nitro's `cloudflare-pages` preset outputs `_worker.js`, `_routes.json`, `_headers`, `_redirects` into `dist/`. Confirmed from build log: `npx wrangler pages deploy dist`.
 
 - [ ] **Step 3: Add environment variables**
 
@@ -114,7 +114,7 @@ Still on the same screen, expand **Environment variables (advanced)** and add al
 
 - [ ] **Step 4: Trigger first deploy**
 
-Click **Save and Deploy**. CF Pages will clone the repo, run `npm run build`, and deploy `.output/public/`.
+Click **Save and Deploy**. CF Pages will clone the repo, run `npm run build`, and deploy `dist/`.
 
 Watch the build log. Expected final line:
 ```

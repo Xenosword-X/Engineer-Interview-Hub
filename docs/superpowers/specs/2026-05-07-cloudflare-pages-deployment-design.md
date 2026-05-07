@@ -40,9 +40,9 @@ Three files need updating before the first deploy.
 |-------|-------|
 | Framework preset | None |
 | Build command | `npm run build` |
-| Build output directory | `.output/public` |
+| Build output directory | `dist` |
 
-> Note: `.output/public` is the correct output path for `nitro.preset: 'cloudflare-pages'` (SSR mode). Using `dist` would cause 500 errors — that path is only for `nuxt generate` (static mode).
+> Note: Nitro's `cloudflare-pages` preset outputs to `dist/` (containing `_worker.js`, `_routes.json`, `_headers`, `_redirects`). This is different from the standard Node preset which uses `.output/`. Confirmed from build log: `npx wrangler pages deploy dist`.
 
 ### Environment Variables (all Production)
 | Variable | Value |
