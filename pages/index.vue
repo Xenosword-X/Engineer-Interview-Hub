@@ -7,10 +7,9 @@ const localePath = useLocalePath()
 
 const { categories } = useCategories()
 
-const activeDomain = ref<'all' | 'frontend' | 'backend' | 'data-engineering' | 'devops'>('all')
+const activeDomain = ref<'frontend' | 'backend' | 'data-engineering' | 'devops'>('frontend')
 
 const DOMAIN_TABS = [
-  { key: 'all', labelKey: 'domains.all' },
   { key: 'frontend', labelKey: 'domains.frontend' },
   { key: 'backend', labelKey: 'domains.backend' },
   { key: 'data-engineering', labelKey: 'domains.dataEngineering' },
@@ -36,10 +35,9 @@ function getCategoryDomain(slug: string): string {
   return DOMAIN_CATEGORY_MAP[slug] ?? 'frontend'
 }
 
-const filteredCategories = computed(() => {
-  if (activeDomain.value === 'all') return categories.value
-  return categories.value.filter(cat => getCategoryDomain(cat.key) === activeDomain.value)
-})
+const filteredCategories = computed(() =>
+  categories.value.filter(cat => getCategoryDomain(cat.key) === activeDomain.value)
+)
 
 import type { QuestionMeta } from '~/composables/useQuestions'
 
@@ -173,7 +171,7 @@ useHead({
         </div>
 
         <div v-if="filteredCategories.length === 0" class="py-12 text-center text-slate-400">
-          <p class="text-sm">{{ t(DOMAIN_TABS.find(tab => tab.key === activeDomain)?.labelKey ?? 'domains.all') }} 領域的題目即將上線</p>
+          <p class="text-sm">{{ t(DOMAIN_TABS.find(tab => tab.key === activeDomain)?.labelKey ?? 'domains.frontend') }} 領域的題目即將上線</p>
         </div>
         <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           <CategoryCard v-for="cat in filteredCategories" :key="cat.key" :category="cat" />

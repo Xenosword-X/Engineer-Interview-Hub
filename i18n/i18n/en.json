@@ -7,9 +7,9 @@
   },
   "home": {
     "badge": "AI Mock Interview · Instant Feedback",
-    "title": "Frontend Engineer",
+    "title": "Engineer",
     "title_accent": "Interview Hub",
-    "description": "80+ curated frontend interview questions with AI instant scoring and a full AI mock interview flow — level up your interview prep.",
+    "description": "180+ curated Engineer interview questions with AI instant scoring and a full AI mock interview flow — level up your interview prep.",
     "stat_questions": "Questions",
     "stat_categories": "Categories",
     "stat_ai": "AI Scoring",
@@ -20,12 +20,12 @@
     "cta_practice_desc": "Type your answer and get instant AI analysis: accuracy, missing points, and an optimised example",
     "cta_practice_btn": "Try AI Scoring",
     "cta_interview_title": "AI Mock Interview",
-    "cta_interview_desc": "Simulate a full frontend interview with an AI interviewer, voice interaction, and a detailed performance report at the end",
+    "cta_interview_desc": "Simulate a full Engineer interview with an AI interviewer, voice interaction, and a detailed performance report at the end",
     "cta_interview_btn": "Start Interview",
     "hero_cta_primary": "Browse Questions",
     "hero_cta_secondary": "Try AI Interview",
-    "seo_title": "Frontend Interview Hub | 80+ Top Questions with AI Scoring",
-    "seo_description": "80+ curated frontend interview questions on JavaScript, Vue, React, CSS, TypeScript, browser internals, Web Vitals and behavioural interviews — with AI-powered answer analysis."
+    "seo_title": "Engineer Interview Hub | 180+ Top Questions with AI Scoring",
+    "seo_description": "180+ curated Engineer interview questions on JavaScript, Vue, React, CSS, TypeScript, browser internals, Web Vitals and behavioural interviews — with AI-powered answer analysis."
   },
   "questions": {
     "page_title": "Question Bank",

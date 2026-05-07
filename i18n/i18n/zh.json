@@ -7,9 +7,9 @@
   },
   "home": {
     "badge": "AI 模擬面試 · 即時評分",
-    "title": "前端工程師",
+    "title": "軟體工程師",
     "title_accent": "面試題庫",
-    "description": "精選 80+ 道高頻前端面試題，搭配 AI 即時評分與完整 AI 模擬面試流程，全面提升你的面試準備。",
+    "description": "精選 180+ 道高頻面試題，搭配 AI 即時評分與完整 AI 模擬面試流程，全面提升你的面試準備。",
     "stat_questions": "精選題目",
     "stat_categories": "技術分類",
     "stat_ai": "即時評分",
@@ -24,8 +24,8 @@
     "cta_interview_btn": "立即開始面試",
     "hero_cta_primary": "瀏覽題庫",
     "hero_cta_secondary": "體驗 AI 面試",
-    "seo_title": "前端工程師 - 面試題庫 | 精選高頻面試題 + AI 即時評分",
-    "seo_description": "精選 80+ 道前端面試題，涵蓋 JavaScript、Vue、React、CSS、TypeScript、瀏覽器原理、Web Vitals、行為面試，搭配 AI 即時診斷答題品質，前端面試必備。"
+    "seo_title": "軟體工程師 - 面試題庫 | 精選高頻面試題 + AI 即時評分",
+    "seo_description": "精選 180+ 道軟體工程師面試題，涵蓋 JavaScript、Vue、React、CSS、TypeScript、瀏覽器原理、Web Vitals、行為面試，搭配 AI 即時診斷答題品質，軟體工程師面試必備。"
   },
   "questions": {
     "page_title": "面試題庫",

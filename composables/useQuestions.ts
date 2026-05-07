@@ -1,4 +1,6 @@
 // composables/useQuestions.ts
+import { DOMAIN_CATEGORIES } from '~/shared/question-domain-categories.mjs'
+
 export interface QuestionMeta {
   id: string
   slug: string
@@ -22,12 +24,17 @@ export function useQuestions() {
   )
 
   const activeTag = computed(() => (route.query.tag as string) ?? '')
+  const activeDomain = computed(() => (route.query.domain as string) ?? '')
 
   const filtered = computed(() => {
     if (!questions.value) return []
-    if (!activeTag.value) return questions.value
-    return questions.value.filter(q => q.category === activeTag.value)
+    if (activeTag.value) return questions.value.filter(q => q.category === activeTag.value)
+    if (activeDomain.value) {
+      const cats = DOMAIN_CATEGORIES[activeDomain.value] ?? []
+      return questions.value.filter(q => cats.includes(q.category))
+    }
+    return questions.value
   })
 
-  return { questions, filtered, activeTag, pending }
+  return { questions, filtered, activeTag, activeDomain, pending }
 }
