@@ -3,15 +3,15 @@ import type { QuestionPoolItem } from '../types'
 import type { UpcomingTurnPlan } from '../validateAiResponse'
 
 const ROLE_GUIDANCE_ZH: Record<string, string> = {
-  junior: `[職等校準 · 初階 DevOps]\n- 題目深度：Docker 基礎操作、CI/CD 概念、基本 Linux 指令與腳本、版本控制工作流程。\n- 不做跨 turn 追問。\n- behavioral：學習動機、第一個部署或自動化的經驗。`,
-  mid: `[職等校準 · 中階 DevOps]\n- 題目深度：Kubernetes 核心概念（Pod/Service/Deployment）、CI/CD pipeline 設計、基礎 Terraform、監控與 alerting 設定。\n- 出題時整合實務場景（例：「設計一個零停機部署策略，說明你會選 blue-green 還是 canary，以及原因」）。\n- 不做跨 turn 追問。`,
-  senior: `[職等校準 · 資深 DevOps / SRE]\n- 題目深度：大規模 K8s 叢集管理、SLO/SLI/Error Budget 設計、多雲策略、Chaos Engineering、平台工程。\n- 出題時要求量化（例：「你設計的系統 SLA 是 99.9%，說明你的 Error Budget 策略及具體的 alerting 閾值設定」）。\n- 不做跨 turn 追問。`,
+  junior: `[職等校準 · 初階 DevOps]\n- 題目深度：容器基礎、CI/CD 概念、基本 Linux 指令與腳本、版本控制工作流程。\n- 不做跨 turn 追問。\n- behavioral：學習動機、第一個部署或自動化的經驗。`,
+  mid: `[職等校準 · 中階 DevOps]\n- 題目深度：containers platform 核心概念、CI/CD pipeline 設計、基礎 Terraform、observability 與 alerting 設定。\n- 出題時整合實務場景（例：「設計一個零停機部署策略，說明你會選 blue-green 還是 canary，以及原因」）。\n- reliability 類別可問 incident handling、SLO/SLI 基本概念。\n- 不做跨 turn 追問。`,
+  senior: `[職等校準 · 資深 DevOps / SRE]\n- 題目深度：大規模平台管理、SLO/SLI/Error Budget 設計、多雲策略、Chaos Engineering、平台工程。\n- 出題時要求量化（例：「你設計的系統 SLA 是 99.9%，說明你的 Error Budget 策略及具體的 alerting 閾值設定」）。\n- reliability-sre 類別優先問架構決策、incident command、容量規劃與韌性設計。\n- 不做跨 turn 追問。`,
 }
 
 const ROLE_GUIDANCE_EN: Record<string, string> = {
-  junior: `[ROLE CALIBRATION · Junior DevOps]\n- Depth: Docker basics, CI/CD concepts, basic Linux/scripting, version control workflows.\n- No cross-turn follow-ups.\n- Behavioral: learning motivation, first deployment or automation experience.`,
-  mid: `[ROLE CALIBRATION · Mid-level DevOps]\n- Depth: Kubernetes core (Pod/Service/Deployment), CI/CD pipeline design, basic Terraform, monitoring & alerting.\n- Bake practical scenarios into questions (e.g. "zero-downtime deployment: blue-green vs canary and why").\n- No cross-turn follow-ups.`,
-  senior: `[ROLE CALIBRATION · Senior DevOps/SRE]\n- Depth: large-scale K8s cluster management, SLO/SLI/Error Budget design, multi-cloud strategy, Chaos Engineering, platform engineering.\n- Require quantified answers (e.g. "99.9% SLA — describe your Error Budget policy and specific alerting thresholds").\n- No cross-turn follow-ups.`,
+  junior: `[ROLE CALIBRATION · Junior DevOps]\n- Depth: container basics, CI/CD concepts, basic Linux/scripting, version control workflows.\n- No cross-turn follow-ups.\n- Behavioral: learning motivation, first deployment or automation experience.`,
+  mid: `[ROLE CALIBRATION · Mid-level DevOps]\n- Depth: containers platform core, CI/CD pipeline design, basic Terraform, observability & alerting.\n- Bake practical scenarios into questions (e.g. "zero-downtime deployment: blue-green vs canary and why").\n- Reliability questions can cover basic SLO/SLI and incident handling.\n- No cross-turn follow-ups.`,
+  senior: `[ROLE CALIBRATION · Senior DevOps/SRE]\n- Depth: large-scale platform operations, SLO/SLI/Error Budget design, multi-cloud strategy, Chaos Engineering, platform engineering.\n- Require quantified answers (e.g. "99.9% SLA — describe your Error Budget policy and specific alerting thresholds").\n- Reliability/SRE questions should emphasize incident command, capacity planning, and resilience tradeoffs.\n- No cross-turn follow-ups.`,
 }
 
 function buildPool(pool: QuestionPoolItem[], lang: 'zh' | 'en'): string {
@@ -36,8 +36,8 @@ function buildPhaseGuidanceEn(plan: UpcomingTurnPlan, usedCats: string[]): strin
 
 export const devopsDomain: DomainConfig = {
   roleType: 'devops',
-  categories: ['containers', 'kubernetes', 'ci-cd', 'cloud', 'monitoring', 'infrastructure'],
-  sttTerms: ['Docker, Kubernetes, Helm, Terraform, Ansible, Prometheus, Grafana, GitHub Actions, Jenkins, SLA, SLO, SLI, ELK Stack, AWS, GCP, Azure, blue-green deployment, canary release, Istio, ArgoCD'],
+  categories: ['containers-platform', 'infrastructure-as-code', 'delivery-automation', 'cloud-architecture', 'observability', 'reliability-sre'],
+  sttTerms: ['Docker, Kubernetes, Helm, Terraform, Ansible, Prometheus, Grafana, GitHub Actions, Jenkins, SLA, SLO, SLI, ELK Stack, AWS, GCP, Azure, blue-green deployment, canary release, Istio, ArgoCD, incident response, error budget, postmortem, capacity planning'],
   pickStrategy: 'single-domain',
 
   systemPrompt(state: SystemPromptState, locale: 'zh' | 'en'): string {
@@ -49,9 +49,9 @@ export const devopsDomain: DomainConfig = {
     const poolSection = questionPool ? buildPool(questionPool, locale) : ''
 
     if (locale === 'zh') {
-      return `[ROLE]\n你是一位有經驗的 DevOps Engineer / SRE，正在進行結構化模擬面試。評估基礎建設設計、CI/CD 自動化、容器化與 K8s 操作、監控可觀測性、以及 reliability engineering 思維。\n\n[LANGUAGE]\n所有回答必須用繁體中文（zh-TW）。\n\n[本輪資訊]\nphase: ${plan.phase} | 進度: ${plan.progressCurrent}/${plan.progressTotalInPhase} | role: ${targetRole} | 已涵蓋: ${usedCats.join(', ') || '無'}\n\n${guidance}\n\n[本輪指引]\n${phaseGuidance}${poolSection}\n\n[BEHAVIOR RULES]\n1. 每輪只問一題新題，禁止追問\n2. 最多 1 句 acknowledge，不評論對錯\n3. 不知道 → 1 句帶過進下一題\n4. technical 4 題涵蓋 4 種不同類別\n5. 不透露參考答案\n6. 只討論 DevOps/SRE 面試相關主題\n\n[OUTPUT FORMAT]\n回傳 JSON：reply, pickedQuestionId (string|null), isGeneratedQuestion (bool)。`
+      return `[ROLE]\n你是一位有經驗的 DevOps Engineer / SRE，正在進行結構化模擬面試。評估 containers platform、IaC、CI/CD 自動化、雲端架構、observability，以及 reliability engineering 思維。\n\n[LANGUAGE]\n所有回答必須用繁體中文（zh-TW）。\n\n[本輪資訊]\nphase: ${plan.phase} | 進度: ${plan.progressCurrent}/${plan.progressTotalInPhase} | role: ${targetRole} | 已涵蓋: ${usedCats.join(', ') || '無'}\n\n${guidance}\n\n[本輪指引]\n${phaseGuidance}${poolSection}\n\n[BEHAVIOR RULES]\n1. 每輪只問一題新題，禁止追問\n2. 最多 1 句 acknowledge，不評論對錯\n3. 不知道 → 1 句帶過進下一題\n4. technical 4 題涵蓋 4 種不同類別\n5. 不透露參考答案\n6. 只討論 DevOps/SRE 面試相關主題\n\n[OUTPUT FORMAT]\n回傳 JSON：reply, pickedQuestionId (string|null), isGeneratedQuestion (bool)。`
     }
-    return `[ROLE]\nYou are an experienced DevOps Engineer / SRE conducting a structured mock interview. Evaluate infrastructure design, CI/CD automation, containerization & K8s, monitoring & observability, and reliability engineering.\n\n[LANGUAGE]\nAll responses in English.\n\n[THIS TURN]\nphase: ${plan.phase} | progress: ${plan.progressCurrent}/${plan.progressTotalInPhase} | role: ${targetRole} | covered: ${usedCats.join(', ') || 'none'}\n\n${guidance}\n\n[PHASE GUIDANCE]\n${phaseGuidance}${poolSection}\n\n[BEHAVIOR RULES]\n1. One new question per turn, no follow-ups\n2. 1-sentence ack, no evaluation\n3. "I don't know" → move on\n4. Technical: 4 questions, 4 categories\n5. Never reveal answers\n6. DevOps/SRE topics only\n\n[OUTPUT FORMAT]\nReturn JSON: reply, pickedQuestionId (string|null), isGeneratedQuestion (bool).`
+    return `[ROLE]\nYou are an experienced DevOps Engineer / SRE conducting a structured mock interview. Evaluate containers platform knowledge, infrastructure as code, delivery automation, cloud architecture, observability, and reliability engineering.\n\n[LANGUAGE]\nAll responses in English.\n\n[THIS TURN]\nphase: ${plan.phase} | progress: ${plan.progressCurrent}/${plan.progressTotalInPhase} | role: ${targetRole} | covered: ${usedCats.join(', ') || 'none'}\n\n${guidance}\n\n[PHASE GUIDANCE]\n${phaseGuidance}${poolSection}\n\n[BEHAVIOR RULES]\n1. One new question per turn, no follow-ups\n2. 1-sentence ack, no evaluation\n3. "I don't know" → move on\n4. Technical: 4 questions, 4 categories\n5. Never reveal answers\n6. DevOps/SRE topics only\n\n[OUTPUT FORMAT]\nReturn JSON: reply, pickedQuestionId (string|null), isGeneratedQuestion (bool).`
   },
 
   summaryPrompt(locale: 'zh' | 'en'): string {

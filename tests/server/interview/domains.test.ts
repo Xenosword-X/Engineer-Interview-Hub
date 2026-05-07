@@ -19,13 +19,15 @@ describe('getDomain', () => {
   it('returns data-engineering domain', () => {
     const d = getDomain('data-engineering')
     expect(d.roleType).toBe('data-engineering')
-    expect(d.categories).toContain('sql')
+    expect(d.categories).toContain('sql-transformation')
+    expect(d.categories).toContain('data-quality-observability')
   })
 
   it('returns devops domain', () => {
     const d = getDomain('devops')
     expect(d.roleType).toBe('devops')
-    expect(d.categories).toContain('kubernetes')
+    expect(d.categories).toContain('containers-platform')
+    expect(d.categories).toContain('reliability-sre')
   })
 
   it('returns fullstack composite domain', () => {

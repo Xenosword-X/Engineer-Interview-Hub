@@ -3,15 +3,15 @@ import type { QuestionPoolItem } from '../types'
 import type { UpcomingTurnPlan } from '../validateAiResponse'
 
 const ROLE_GUIDANCE_ZH: Record<string, string> = {
-  junior: `[職等校準 · 初階資料工程師]\n- 題目深度：基礎 SQL 查詢與 JOIN、ETL 概念、常見資料格式（CSV/JSON/Parquet）。\n- 不做跨 turn 追問。\n- behavioral：學習動機、資料處理的第一個專案經驗。`,
-  mid: `[職等校準 · 中階資料工程師]\n- 題目深度：SQL 最佳化與索引、Pipeline 設計模式（ELT vs ETL）、Spark 基礎操作、資料倉儲 schema 設計。\n- 出題時整合實務場景（例：「設計一個每日 ETL pipeline，把 RDBMS 資料同步到 Data Warehouse，說明你的設計考量」）。\n- 不做跨 turn 追問。`,
-  senior: `[職等校準 · 資深資料工程師]\n- 題目深度：大規模 Pipeline 設計、資料品質監控、Streaming vs Batch 取捨、多租戶資料平台設計。\n- 出題時要求量化與架構決策（例：「每日 10TB 資料，如何在成本與延遲之間取捨，選擇 Spark/Flink/dbt 各有什麼理由」）。\n- 不做跨 turn 追問。`,
+  junior: `[職等校準 · 初階資料工程師]\n- 題目深度：分析型 SQL 與 JOIN、ETL/ELT 概念、常見資料格式（CSV/JSON/Parquet）。\n- SQL 類別聚焦 analytics / transformation SQL，不與後端 application DB 題混用。\n- 不做跨 turn 追問。\n- behavioral：學習動機、資料處理的第一個專案經驗。`,
+  mid: `[職等校準 · 中階資料工程師]\n- 題目深度：分析型 SQL 最佳化、Pipeline orchestration 設計模式（ELT vs ETL）、Spark 基礎操作、資料倉儲建模、資料品質檢查。\n- 出題時整合實務場景（例：「設計一個每日 ELT workflow，把 RDBMS 資料同步到 Data Warehouse，說明你的設計考量」）。\n- 不做跨 turn 追問。`,
+  senior: `[職等校準 · 資深資料工程師]\n- 題目深度：大規模 Pipeline 設計、資料品質與 observability、Streaming vs Batch 取捨、多租戶資料平台設計。\n- 出題時要求量化與架構決策（例：「每日 10TB 資料，如何在成本與延遲之間取捨，選擇 Spark/Flink/dbt 各有什麼理由」）。\n- 不做跨 turn 追問。`,
 }
 
 const ROLE_GUIDANCE_EN: Record<string, string> = {
-  junior: `[ROLE CALIBRATION · Junior Data Engineer]\n- Depth: basic SQL, JOINs, ETL concepts, common formats (CSV/JSON/Parquet).\n- No cross-turn follow-ups.\n- Behavioral: learning motivation, first data project experience.`,
-  mid: `[ROLE CALIBRATION · Mid-level Data Engineer]\n- Depth: SQL optimization & indexing, ELT vs ETL patterns, basic Spark, data warehouse schema design.\n- Bake practical scenarios into questions.\n- No cross-turn follow-ups.`,
-  senior: `[ROLE CALIBRATION · Senior Data Engineer]\n- Depth: large-scale pipeline design, data quality monitoring, streaming vs batch tradeoffs, multi-tenant data platform.\n- Ask for quantified decisions (e.g. "10TB/day — how do you balance cost vs latency choosing between Spark/Flink/dbt").\n- No cross-turn follow-ups.`,
+  junior: `[ROLE CALIBRATION · Junior Data Engineer]\n- Depth: analytical SQL, JOINs, ETL/ELT concepts, common formats (CSV/JSON/Parquet).\n- SQL stays in analytics / transformation workloads, not backend application DB design.\n- No cross-turn follow-ups.\n- Behavioral: learning motivation, first data project experience.`,
+  mid: `[ROLE CALIBRATION · Mid-level Data Engineer]\n- Depth: analytical SQL optimization, orchestration patterns (ELT vs ETL), basic Spark, warehouse modeling, data quality checks.\n- Bake practical scenarios into questions.\n- No cross-turn follow-ups.`,
+  senior: `[ROLE CALIBRATION · Senior Data Engineer]\n- Depth: large-scale pipeline design, data quality & observability, streaming vs batch tradeoffs, multi-tenant data platform.\n- Ask for quantified decisions (e.g. "10TB/day — how do you balance cost vs latency choosing between Spark/Flink/dbt").\n- No cross-turn follow-ups.`,
 }
 
 function buildPool(pool: QuestionPoolItem[], lang: 'zh' | 'en'): string {
@@ -41,8 +41,8 @@ function buildPhaseGuidanceEn(plan: UpcomingTurnPlan, usedCats: string[]): strin
 
 export const dataEngineeringDomain: DomainConfig = {
   roleType: 'data-engineering',
-  categories: ['sql', 'nosql', 'pipeline', 'warehouse', 'streaming', 'batch-processing'],
-  sttTerms: ['ETL, ELT, Spark, Kafka, Airflow, dbt, Snowflake, BigQuery, Parquet, Delta Lake, CDC, Redshift, Hadoop, HDFS, data lineage, schema registry, Apache Flink, data catalog'],
+  categories: ['sql-transformation', 'pipeline-orchestration', 'warehouse-modeling', 'batch-processing', 'stream-processing', 'data-quality-observability'],
+  sttTerms: ['ETL, ELT, Spark, Kafka, Airflow, dbt, Snowflake, BigQuery, Parquet, Delta Lake, CDC, Redshift, Hadoop, HDFS, data lineage, schema registry, Apache Flink, data catalog, data quality, freshness SLA, lineage, Great Expectations, Monte Carlo'],
   pickStrategy: 'single-domain',
 
   systemPrompt(state: SystemPromptState, locale: 'zh' | 'en'): string {
@@ -54,9 +54,9 @@ export const dataEngineeringDomain: DomainConfig = {
     const poolSection = questionPool ? buildPool(questionPool, locale) : ''
 
     if (locale === 'zh') {
-      return `[ROLE]\n你是一位有經驗的資料工程師 / Data Platform Lead，正在進行結構化模擬面試。評估 SQL 最佳化、Pipeline 設計、分散式運算框架使用能力、資料品質與可觀測性思維。\n\n[LANGUAGE]\n所有回答必須用繁體中文（zh-TW）。\n\n[本輪資訊]\nphase: ${plan.phase} | 進度: ${plan.progressCurrent}/${plan.progressTotalInPhase} | role: ${targetRole} | 已涵蓋: ${usedCats.join(', ') || '無'}\n\n${guidance}\n\n[本輪指引]\n${phaseGuidance}${poolSection}\n\n[BEHAVIOR RULES]\n1. 每輪只問一題新題，禁止追問\n2. 最多 1 句 acknowledge，不評論對錯\n3. 不知道 → 1 句帶過進下一題\n4. technical 4 題涵蓋 4 種不同類別\n5. 不透露參考答案\n6. 只討論資料工程面試相關主題\n\n[OUTPUT FORMAT]\n回傳 JSON：reply, pickedQuestionId (string|null), isGeneratedQuestion (bool)。`
+      return `[ROLE]\n你是一位有經驗的資料工程師 / Data Platform Lead，正在進行結構化模擬面試。評估分析型 SQL、Pipeline orchestration 設計、資料倉儲建模、分散式運算框架使用能力，以及資料品質與 observability 思維。\n\n[LANGUAGE]\n所有回答必須用繁體中文（zh-TW）。\n\n[本輪資訊]\nphase: ${plan.phase} | 進度: ${plan.progressCurrent}/${plan.progressTotalInPhase} | role: ${targetRole} | 已涵蓋: ${usedCats.join(', ') || '無'}\n\n${guidance}\n\n[本輪指引]\n${phaseGuidance}${poolSection}\n\n[BEHAVIOR RULES]\n1. 每輪只問一題新題，禁止追問\n2. 最多 1 句 acknowledge，不評論對錯\n3. 不知道 → 1 句帶過進下一題\n4. technical 4 題涵蓋 4 種不同類別\n5. 不透露參考答案\n6. 只討論資料工程面試相關主題\n\n[OUTPUT FORMAT]\n回傳 JSON：reply, pickedQuestionId (string|null), isGeneratedQuestion (bool)。`
     }
-    return `[ROLE]\nYou are an experienced Data Engineer / Data Platform Lead conducting a structured mock interview. Evaluate SQL optimization, pipeline design, distributed processing frameworks, data quality, and observability.\n\n[LANGUAGE]\nAll responses in English.\n\n[THIS TURN]\nphase: ${plan.phase} | progress: ${plan.progressCurrent}/${plan.progressTotalInPhase} | role: ${targetRole} | covered: ${usedCats.join(', ') || 'none'}\n\n${guidance}\n\n[PHASE GUIDANCE]\n${phaseGuidance}${poolSection}\n\n[BEHAVIOR RULES]\n1. One new question per turn, no follow-ups\n2. 1-sentence ack, no evaluation\n3. "I don't know" → move on\n4. Technical: 4 questions, 4 categories\n5. Never reveal answers\n6. Data engineering topics only\n\n[OUTPUT FORMAT]\nReturn JSON: reply, pickedQuestionId (string|null), isGeneratedQuestion (bool).`
+    return `[ROLE]\nYou are an experienced Data Engineer / Data Platform Lead conducting a structured mock interview. Evaluate analytical SQL, pipeline orchestration design, warehouse modeling, distributed processing frameworks, and data quality / observability.\n\n[LANGUAGE]\nAll responses in English.\n\n[THIS TURN]\nphase: ${plan.phase} | progress: ${plan.progressCurrent}/${plan.progressTotalInPhase} | role: ${targetRole} | covered: ${usedCats.join(', ') || 'none'}\n\n${guidance}\n\n[PHASE GUIDANCE]\n${phaseGuidance}${poolSection}\n\n[BEHAVIOR RULES]\n1. One new question per turn, no follow-ups\n2. 1-sentence ack, no evaluation\n3. "I don't know" → move on\n4. Technical: 4 questions, 4 categories\n5. Never reveal answers\n6. Data engineering topics only\n\n[OUTPUT FORMAT]\nReturn JSON: reply, pickedQuestionId (string|null), isGeneratedQuestion (bool).`
   },
 
   summaryPrompt(locale: 'zh' | 'en'): string {

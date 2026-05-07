@@ -133,21 +133,24 @@ server/utils/interview/domains/
 
 #### Backend
 - **面試官人設：** Senior Backend Engineer / Tech Lead
-- **評估重點：** API 設計、系統擴展性、資料庫設計、安全性
-- **Categories：** `backend-api`, `backend-language`, `backend-database`, `backend-system-design`, `backend-security`, `backend-performance`
+- **評估重點：** API 設計、系統擴展性、應用資料庫設計、安全性、效能
+- **Categories：** `api-design`, `language`, `database`, `system-design`, `security`, `performance`
+- **邊界定義：** `database` 僅涵蓋 OLTP / application-serving data（transactions、index strategy、query plan、locking、consistency），不包含 warehouse / ETL / analytics SQL。
 - **STT 術語：** REST, GraphQL, gRPC, JWT, OAuth, Redis, PostgreSQL, microservices, ACID, CAP theorem, Node.js, Python, FastAPI, Spring Boot, message queue, load balancer
 
 #### Data Engineering
 - **面試官人設：** Senior Data Engineer / Data Platform Lead
-- **評估重點：** Pipeline 設計、SQL 最佳化、分散式處理框架
-- **Categories：** `data-sql`, `data-nosql`, `data-pipeline`, `data-warehouse`, `data-streaming`, `data-batch`
-- **STT 術語：** ETL, ELT, Spark, Kafka, Airflow, dbt, Snowflake, BigQuery, Parquet, Delta Lake, CDC, Redshift, Hadoop, HDFS, data lineage, schema registry
+- **評估重點：** 分析型 SQL、Pipeline orchestration、資料倉儲建模、分散式處理框架、資料品質與可觀測性
+- **Categories：** `sql-transformation`, `pipeline-orchestration`, `warehouse-modeling`, `batch-processing`, `stream-processing`, `data-quality-observability`
+- **邊界定義：** `sql-transformation` 專注 analytics / transformation SQL，不和 backend 的 application DB 題重疊；`data-quality-observability` 收 freshness、lineage、schema evolution、DQ checks、alerts。
+- **STT 術語：** ETL, ELT, Spark, Kafka, Airflow, dbt, Snowflake, BigQuery, Parquet, Delta Lake, CDC, Redshift, Hadoop, HDFS, data lineage, schema registry, Great Expectations, freshness SLA
 
 #### DevOps / SRE
 - **面試官人設：** Senior DevOps Engineer / SRE
 - **評估重點：** 基礎建設、CI/CD、可觀測性、可靠性工程
-- **Categories：** `devops-container`, `devops-k8s`, `devops-cicd`, `devops-cloud`, `devops-monitoring`, `devops-iac`
-- **STT 術語：** Docker, Kubernetes, Helm, Terraform, Ansible, Prometheus, Grafana, GitHub Actions, Jenkins, SLA, SLO, SLI, ELK Stack, AWS, GCP, Azure, blue-green deployment, canary release
+- **Categories：** `containers-platform`, `infrastructure-as-code`, `delivery-automation`, `cloud-architecture`, `observability`, `reliability-sre`
+- **邊界定義：** `containers-platform` 合併容器 runtime 與 K8s workload 基礎；`reliability-sre` 專收 SLO/SLI、error budget、incident response、capacity planning、resilience tradeoff。
+- **STT 術語：** Docker, Kubernetes, Helm, Terraform, Ansible, Prometheus, Grafana, GitHub Actions, Jenkins, SLA, SLO, SLI, ELK Stack, AWS, GCP, Azure, blue-green deployment, canary release, incident response, postmortem
 
 #### Full-stack（Composite）
 - **面試官人設：** Senior Full-stack Tech Lead
@@ -193,9 +196,9 @@ const pool = await supabase
 | Domain | Categories | 目標題數（MVP） |
 |--------|-----------|--------------|
 | Frontend | 7 個（既有） | 80+（已有，維持） |
-| Backend | `backend-api`, `backend-language`, `backend-database`, `backend-system-design`, `backend-security`, `backend-performance` | 60+（每類 ~10 題） |
-| Data Engineering | `data-sql`, `data-nosql`, `data-pipeline`, `data-warehouse`, `data-streaming`, `data-batch` | 48+（每類 ~8 題） |
-| DevOps | `devops-container`, `devops-k8s`, `devops-cicd`, `devops-cloud`, `devops-monitoring`, `devops-iac` | 48+（每類 ~8 題） |
+| Backend | `api-design`, `language`, `database`, `system-design`, `security`, `performance` | 60+（每類 ~10 題） |
+| Data Engineering | `sql-transformation`, `pipeline-orchestration`, `warehouse-modeling`, `batch-processing`, `stream-processing`, `data-quality-observability` | 48+（每類 ~8 題） |
+| DevOps | `containers-platform`, `infrastructure-as-code`, `delivery-automation`, `cloud-architecture`, `observability`, `reliability-sre` | 48+（每類 ~8 題） |
 
 題目由 Admin 後台透過現有 CRUD 功能新增（選好 domain + category），可用 AI 輔助產題後人工審核發布。
 

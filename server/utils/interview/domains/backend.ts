@@ -3,14 +3,14 @@ import type { QuestionPoolItem } from '../types'
 import type { UpcomingTurnPlan } from '../validateAiResponse'
 
 const ROLE_GUIDANCE_ZH: Record<string, string> = {
-  junior: `[職等校準 · 初階後端]\n- 題目深度：RESTful API 基礎、SQL 基礎查詢、基本安全概念（SQL injection、HTTPS）。\n- 不做跨 turn 追問。\n- behavioral：學習動機、協作、面對陌生技術的處理方式。\n- 用詞：直白。`,
-  mid: `[職等校準 · 中階後端]\n- 題目深度：API 設計原則、DB 索引與交易、快取策略、基本系統設計。\n- 出題時把實務應用直接寫進題目（例：「請解釋 DB 索引原理，並說明你在專案中如何選擇索引欄位」）。\n- 不做跨 turn 追問。\n- behavioral：具體專案挑戰、技術選型、API 設計決策。`,
+  junior: `[職等校準 · 初階後端]\n- 題目深度：RESTful API 基礎、應用型資料庫的 SQL 基礎查詢、基本安全概念（SQL injection、HTTPS）。\n- database 類別聚焦 OLTP / application-serving data，不討論資料倉儲與 ETL。\n- 不做跨 turn 追問。\n- behavioral：學習動機、協作、面對陌生技術的處理方式。\n- 用詞：直白。`,
+  mid: `[職等校準 · 中階後端]\n- 題目深度：API 設計原則、應用資料庫索引與交易、快取策略、基本系統設計。\n- database 類別只收 app workload 的 schema、query plan、locking、consistency；不要出成 analytics SQL 或 warehouse 題。\n- 出題時把實務應用直接寫進題目（例：「請解釋 DB 索引原理，並說明你在專案中如何選擇索引欄位」）。\n- 不做跨 turn 追問。\n- behavioral：具體專案挑戰、技術選型、API 設計決策。`,
   senior: `[職等校準 · 資深後端]\n- 題目深度：分散式系統設計、高可用性、CAP theorem 實際應用、效能瓶頸診斷。\n- 出題時組合多面向（例：「設計一個支援每秒 10,000 請求的訊息佇列，說明你的 tradeoff」）。\n- 不做跨 turn 追問：要更多深度就從 pool 挑更難的題。\n- behavioral：系統架構決策、技術債管理、跨團隊協作。`,
 }
 
 const ROLE_GUIDANCE_EN: Record<string, string> = {
-  junior: `[ROLE CALIBRATION · Junior Backend]\n- Depth: RESTful API basics, basic SQL queries, fundamental security (SQL injection, HTTPS).\n- No cross-turn follow-ups.\n- Behavioral: learning motivation, collaboration, handling unfamiliar tech.\n- Tone: plain language.`,
-  mid: `[ROLE CALIBRATION · Mid-level Backend]\n- Depth: API design principles, DB indexing and transactions, caching strategies, basic system design.\n- Bake applied experience into each question.\n- No cross-turn follow-ups.\n- Behavioral: concrete project challenges, tech selection, API design decisions.`,
+  junior: `[ROLE CALIBRATION · Junior Backend]\n- Depth: RESTful API basics, basic SQL queries for application data, fundamental security (SQL injection, HTTPS).\n- The database category is OLTP / application-serving data only, not warehousing or ETL.\n- No cross-turn follow-ups.\n- Behavioral: learning motivation, collaboration, handling unfamiliar tech.\n- Tone: plain language.`,
+  mid: `[ROLE CALIBRATION · Mid-level Backend]\n- Depth: API design principles, application DB indexing and transactions, caching strategies, basic system design.\n- Database questions should stay on app workloads: schema choices, query plans, locking, consistency.\n- Bake applied experience into each question.\n- No cross-turn follow-ups.\n- Behavioral: concrete project challenges, tech selection, API design decisions.`,
   senior: `[ROLE CALIBRATION · Senior Backend]\n- Depth: distributed systems, high availability, CAP theorem in practice, performance bottleneck diagnosis.\n- Compose multi-faceted questions (e.g. "Design a message queue supporting 10k RPS and explain your tradeoffs").\n- No cross-turn follow-ups. For more depth, pick a harder pool question.\n- Behavioral: architecture decisions, tech debt management, cross-team influence.`,
 }
 

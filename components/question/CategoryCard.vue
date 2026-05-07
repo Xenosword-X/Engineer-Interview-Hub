@@ -22,6 +22,11 @@ const iconBgMap: Record<string, string> = {
   security:            'bg-red-100     text-red-700',
   performance:         'bg-lime-100    text-lime-700',
   // Data Engineering
+  'sql-transformation':    'bg-yellow-100  text-yellow-700',
+  'pipeline-orchestration':'bg-green-100   text-green-700',
+  'warehouse-modeling':    'bg-amber-100   text-amber-800',
+  'stream-processing':     'bg-sky-100     text-sky-800',
+  'data-quality-observability': 'bg-cyan-100 text-cyan-800',
   sql:                 'bg-yellow-100  text-yellow-700',
   nosql:               'bg-fuchsia-100 text-fuchsia-700',
   pipeline:            'bg-green-100   text-green-700',
@@ -29,6 +34,12 @@ const iconBgMap: Record<string, string> = {
   streaming:           'bg-sky-100     text-sky-800',
   'batch-processing':  'bg-teal-100    text-teal-800',
   // DevOps
+  'containers-platform':'bg-blue-100    text-blue-700',
+  'infrastructure-as-code': 'bg-slate-100 text-slate-700',
+  'delivery-automation':'bg-orange-100  text-orange-700',
+  'cloud-architecture':'bg-indigo-100   text-indigo-800',
+  observability:       'bg-emerald-100 text-emerald-800',
+  'reliability-sre':   'bg-rose-100    text-rose-800',
   containers:          'bg-blue-100    text-blue-700',
   kubernetes:          'bg-violet-100  text-violet-800',
   'ci-cd':             'bg-orange-100  text-orange-700',
@@ -107,6 +118,11 @@ const iconClass = computed(() => iconBgMap[props.category.key] ?? 'bg-slate-100 
 .iv-cat--security           { --cat-accent: #ef4444; }
 .iv-cat--performance        { --cat-accent: #84cc16; }
 /* Data Engineering */
+.iv-cat--sql-transformation     { --cat-accent: #eab308; }
+.iv-cat--pipeline-orchestration { --cat-accent: #22c55e; }
+.iv-cat--warehouse-modeling     { --cat-accent: #f59e0b; }
+.iv-cat--stream-processing      { --cat-accent: #0ea5e9; }
+.iv-cat--data-quality-observability { --cat-accent: #06b6d4; }
 .iv-cat--sql                { --cat-accent: #eab308; }
 .iv-cat--nosql              { --cat-accent: #d946ef; }
 .iv-cat--pipeline           { --cat-accent: #22c55e; }
@@ -114,6 +130,12 @@ const iconClass = computed(() => iconBgMap[props.category.key] ?? 'bg-slate-100 
 .iv-cat--streaming          { --cat-accent: #0ea5e9; }
 .iv-cat--batch-processing   { --cat-accent: #14b8a6; }
 /* DevOps */
+.iv-cat--containers-platform    { --cat-accent: #3b82f6; }
+.iv-cat--infrastructure-as-code { --cat-accent: #64748b; }
+.iv-cat--delivery-automation    { --cat-accent: #f97316; }
+.iv-cat--cloud-architecture     { --cat-accent: #6366f1; }
+.iv-cat--observability          { --cat-accent: #10b981; }
+.iv-cat--reliability-sre        { --cat-accent: #f43f5e; }
 .iv-cat--containers         { --cat-accent: #3b82f6; }
 .iv-cat--kubernetes         { --cat-accent: #7c3aed; }
 .iv-cat--ci-cd              { --cat-accent: #f97316; }

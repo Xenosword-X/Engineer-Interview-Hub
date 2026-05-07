@@ -1,5 +1,7 @@
 <!-- pages/admin/questions/index.vue -->
 <script setup lang="ts">
+import { getCategoriesForDomain, getCategoryLabel } from '~/shared/question-domain-categories.mjs'
+
 definePageMeta({ layout: 'admin' })
 defineI18nRoute(false)
 
@@ -25,6 +27,7 @@ const { data: questions, refresh } = await useAsyncData(
   'admin-questions',
   () => $fetch<AdminQuestion[]>('/api/admin/questions')
 )
+const { t } = useI18n()
 
 const search         = ref('')
 const filterCategory = ref('')
@@ -33,7 +36,19 @@ const confirmDelete  = ref<string | null>(null)
 const deleting       = ref(false)
 const deleteError    = ref('')
 
-const categories = ['javascript', 'vue', 'css', 'network-security', 'html', 'web-vitals', 'browser', 'behavioral']
+const categories = computed(() => getCategoriesForDomain(domainFilter.value))
+const categoryOptions = computed(() =>
+  categories.value.map((cat: string) => ({
+    value: cat,
+    label: `${t(`categories.${cat}`)} (${cat})`,
+  }))
+)
+
+watch(domainFilter, () => {
+  if (filterCategory.value && !categories.value.includes(filterCategory.value)) {
+    filterCategory.value = ''
+  }
+})
 
 const filtered = computed(() => {
   if (!questions.value) return []
@@ -93,7 +108,7 @@ async function deleteQuestion(id: string) {
         class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
       >
         <option value="">所有分類</option>
-        <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
+        <option v-for="cat in categoryOptions" :key="cat.value" :value="cat.value">{{ cat.label }}</option>
       </select>
       <select
         v-model="domainFilter"
@@ -126,7 +141,7 @@ async function deleteQuestion(id: string) {
         <tbody class="divide-y divide-slate-100">
           <tr v-for="q in filtered" :key="q.id" class="hover:bg-slate-50 transition-colors">
             <td class="px-4 py-3 font-mono text-xs text-slate-600">{{ q.slug }}</td>
-            <td class="px-4 py-3 text-slate-600">{{ q.category }}</td>
+            <td class="px-4 py-3 text-slate-600">{{ getCategoryLabel(q.category, t) }}</td>
             <td class="px-4 py-3 text-slate-600">{{ q.difficulty }}</td>
             <td class="px-4 py-3 text-slate-600">{{ q.domain ?? '—' }}</td>
             <td class="px-4 py-3">

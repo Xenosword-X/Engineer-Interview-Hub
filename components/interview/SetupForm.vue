@@ -21,15 +21,15 @@ const selectedCategories = ref<string[]>([])
 
 const domainCategories: Record<string, string[]> = {
   frontend: ['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral'],
-  backend: ['backend-api', 'backend-language', 'backend-database', 'backend-system-design', 'backend-security', 'backend-performance'],
-  'data-engineering': ['data-sql', 'data-nosql', 'data-pipeline', 'data-warehouse', 'data-streaming', 'data-batch'],
-  devops: ['devops-container', 'devops-k8s', 'devops-cicd', 'devops-cloud', 'devops-monitoring', 'devops-iac'],
-  fullstack: ['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral', 'backend-api', 'backend-language', 'backend-database', 'backend-system-design', 'backend-security', 'backend-performance'],
+  backend: ['api-design', 'language', 'database', 'system-design', 'security', 'performance'],
+  'data-engineering': ['sql-transformation', 'pipeline-orchestration', 'warehouse-modeling', 'batch-processing', 'stream-processing', 'data-quality-observability'],
+  devops: ['containers-platform', 'infrastructure-as-code', 'delivery-automation', 'cloud-architecture', 'observability', 'reliability-sre'],
+  fullstack: ['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral', 'api-design', 'language', 'database', 'system-design', 'security', 'performance'],
 }
 
 // Frontend-only categories for fullstack split view
 const frontendCats = ['javascript', 'vue', 'css', 'html', 'web-vitals', 'browser', 'behavioral']
-const backendCats  = ['backend-api', 'backend-language', 'backend-database', 'backend-system-design', 'backend-security', 'backend-performance']
+const backendCats  = ['api-design', 'language', 'database', 'system-design', 'security', 'performance']
 
 watch(selectedRole, (role) => {
   if (!role) return

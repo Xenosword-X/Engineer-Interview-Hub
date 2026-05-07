@@ -1,6 +1,7 @@
 <!-- components/admin/MarkdownEditor.vue -->
 <script setup lang="ts">
 import { Marked, Renderer } from 'marked'
+import { DOMAIN_CATEGORIES } from '~/shared/question-domain-categories.mjs'
 
 interface LocaleContent {
   title: string
@@ -31,6 +32,7 @@ const emit = defineEmits<{
 }>()
 
 const activeLocale = ref<'zh' | 'en'>('zh')
+const { t } = useI18n()
 
 // Local marked instance (avoid mutating the global singleton)
 const myMarked = new Marked()
@@ -54,14 +56,13 @@ const previewHtml = computed(() => {
   return myMarked.parse(preprocessMarkdown(md)) as string
 })
 
-const DOMAIN_CATEGORIES: Record<string, string[]> = {
-  frontend:          ['javascript', 'vue', 'css', 'typescript', 'html', 'web-vitals', 'browser', 'behavioral'],
-  backend:           ['api-design', 'language', 'database', 'system-design', 'security', 'performance'],
-  'data-engineering':['sql', 'nosql', 'pipeline', 'warehouse', 'streaming', 'batch-processing'],
-  devops:            ['containers', 'kubernetes', 'ci-cd', 'cloud', 'monitoring', 'infrastructure'],
-}
-
-const categories = computed(() => DOMAIN_CATEGORIES[props.domain] ?? DOMAIN_CATEGORIES.frontend)
+const categories = computed<string[]>(() => DOMAIN_CATEGORIES[props.domain] ?? DOMAIN_CATEGORIES.frontend ?? [])
+const categoryOptions = computed(() =>
+  categories.value.map(cat => ({
+    value: cat,
+    label: `${t(`categories.${cat}`)} (${cat})`,
+  }))
+)
 
 watch(() => props.domain, () => {
   if (!categories.value.includes(props.category)) {
@@ -120,7 +121,7 @@ function updateBody(e: Event) {
           class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
           <option value="" disabled>請選擇…</option>
-          <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
+          <option v-for="cat in categoryOptions" :key="cat.value" :value="cat.value">{{ cat.label }}</option>
         </select>
       </div>
       <div>

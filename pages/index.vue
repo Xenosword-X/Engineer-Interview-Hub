@@ -25,11 +25,11 @@ const DOMAIN_CATEGORY_MAP: Record<string, string> = {
   'api-design': 'backend', language: 'backend', database: 'backend',
   'system-design': 'backend', security: 'backend', performance: 'backend',
   // data-engineering
-  sql: 'data-engineering', nosql: 'data-engineering', pipeline: 'data-engineering',
-  warehouse: 'data-engineering', streaming: 'data-engineering', 'batch-processing': 'data-engineering',
+  'sql-transformation': 'data-engineering', 'pipeline-orchestration': 'data-engineering', 'warehouse-modeling': 'data-engineering',
+  'batch-processing': 'data-engineering', 'stream-processing': 'data-engineering', 'data-quality-observability': 'data-engineering',
   // devops
-  containers: 'devops', kubernetes: 'devops', 'ci-cd': 'devops',
-  cloud: 'devops', monitoring: 'devops', infrastructure: 'devops',
+  'containers-platform': 'devops', 'infrastructure-as-code': 'devops', 'delivery-automation': 'devops',
+  'cloud-architecture': 'devops', observability: 'devops', 'reliability-sre': 'devops',
 }
 
 function getCategoryDomain(slug: string): string {
