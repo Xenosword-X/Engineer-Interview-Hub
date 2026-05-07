@@ -2,6 +2,11 @@
 <script setup lang="ts">
 import { Marked, Renderer } from 'marked'
 import type { QuestionItem, QuestionMeta } from '~/composables/useQuestions'
+import { DOMAIN_CATEGORIES } from '~/shared/question-domain-categories.mjs'
+
+const CATEGORY_DOMAIN_MAP: Record<string, string> = Object.entries(DOMAIN_CATEGORIES)
+  .flatMap(([domain, cats]) => (cats as string[]).map(cat => [cat, domain]))
+  .reduce((acc, [cat, domain]) => ({ ...acc, [cat]: domain }), {})
 
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
@@ -150,7 +155,10 @@ useHead({
       <nav class="flex items-center gap-1.5 text-xs text-[--color-text-muted] mb-5" aria-label="Breadcrumb">
         <NuxtLink :to="localePath('/')" class="hover:text-[--color-primary]">{{ t('detail.home') }}</NuxtLink>
         <span>›</span>
-        <NuxtLink :to="`${localePath('/questions')}?tag=${question?.category}`" class="hover:text-[--color-primary]">
+        <NuxtLink
+          :to="`${localePath('/questions')}?domain=${CATEGORY_DOMAIN_MAP[question?.category ?? ''] ?? 'frontend'}&tag=${question?.category}`"
+          class="hover:text-[--color-primary]"
+        >
           {{ t(`categories.${question?.category}`) }}
         </NuxtLink>
         <span>›</span>

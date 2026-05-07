@@ -111,12 +111,12 @@ useHead({
 
         <div class="iv-hero-stats" aria-label="Site statistics">
           <div class="iv-hero-stat">
-            <span class="iv-hero-stat-num">80+</span>
+            <span class="iv-hero-stat-num">180+</span>
             <span class="iv-hero-stat-label">{{ t('home.stat_questions') }}</span>
           </div>
           <div class="iv-hero-divider" aria-hidden="true" />
           <div class="iv-hero-stat">
-            <span class="iv-hero-stat-num">8</span>
+            <span class="iv-hero-stat-num">4</span>
             <span class="iv-hero-stat-label">{{ t('home.stat_categories') }}</span>
           </div>
           <div class="iv-hero-divider" aria-hidden="true" />

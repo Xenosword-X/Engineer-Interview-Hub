@@ -12,7 +12,7 @@ const { t } = useI18n()
       </div>
       <div class="flex gap-4 shrink-0">
         <a
-          href="https://github.com/Xenosword-X/FE-Interview-Hub"
+          href="https://github.com/Xenosword-X/Engineer-Interview-Hub"
           target="_blank"
           rel="noopener noreferrer"
           class="text-xs text-[--color-text-muted] hover:text-[--color-primary] transition-colors"

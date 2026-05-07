@@ -275,7 +275,7 @@ git commit -m "feat: add Tailwind CSS v4 with design tokens"
     "badge": "AI 模擬面試 · 即時評分",
     "title": "前端工程師",
     "title_accent": "面試題庫",
-    "description": "精選 80+ 道高頻前端面試題，涵蓋 JS、Vue、CSS、TypeScript 等核心領域，搭配 AI 即時診斷你的答題品質。",
+    "description": "精選 180+ 道高頻前端面試題，涵蓋 JS、Vue、CSS、TypeScript 等核心領域，搭配 AI 即時診斷你的答題品質。",
     "stat_questions": "精選題目",
     "stat_categories": "技術分類",
     "stat_ai": "即時評分",
@@ -354,7 +354,7 @@ git commit -m "feat: add Tailwind CSS v4 with design tokens"
     "badge": "AI Mock Interview · Instant Feedback",
     "title": "Frontend Engineer",
     "title_accent": "Interview Hub",
-    "description": "80+ curated frontend interview questions covering JS, Vue, CSS, TypeScript and more — with AI-powered answer analysis.",
+    "description": "180+ curated frontend interview questions covering JS, Vue, CSS, TypeScript and more — with AI-powered answer analysis.",
     "stat_questions": "Questions",
     "stat_categories": "Categories",
     "stat_ai": "AI Scoring",
@@ -1612,11 +1612,11 @@ useHead({
       </p>
       <div class="flex justify-center gap-8">
         <div class="text-center">
-          <p class="text-[22px] font-bold text-[--color-text-primary]">80+</p>
+          <p class="text-[22px] font-bold text-[--color-text-primary]">180+</p>
           <p class="text-xs text-[--color-text-muted] mt-0.5">{{ t('home.stat_questions') }}</p>
         </div>
         <div class="text-center">
-          <p class="text-[22px] font-bold text-[--color-text-primary]">8</p>
+          <p class="text-[22px] font-bold text-[--color-text-primary]">4</p>
           <p class="text-xs text-[--color-text-muted] mt-0.5">{{ t('home.stat_categories') }}</p>
         </div>
         <div class="text-center">

@@ -25,7 +25,7 @@
     "hero_cta_primary": "Browse Questions",
     "hero_cta_secondary": "Try AI Interview",
     "seo_title": "Engineer Interview Hub | 180+ Top Questions with AI Scoring",
-    "seo_description": "180+ curated Engineer interview questions on JavaScript, Vue, React, CSS, TypeScript, browser internals, Web Vitals and behavioural interviews — with AI-powered answer analysis."
+    "seo_description": "180+ curated Software Engineer interview questions covering JavaScript, Vue, CSS, system design, databases, SQL, data pipelines, containers, CI/CD, and cloud architecture — with AI-powered answer analysis for frontend, backend, data engineering, and DevOps roles."
   },
   "questions": {
     "page_title": "Question Bank",
@@ -155,12 +155,12 @@
     "loading": "Loading...",
     "setup": {
       "title": "AI Mock Interview",
-      "subtitle": "Go through a full 10-20 minute frontend engineer interview simulation",
+      "subtitle": "Go through a full 10-20 minute engineer interview simulation",
       "role_label": "Target Role",
-      "role_name": "Frontend Engineer",
-      "role_junior": "Frontend Engineer (Junior)",
-      "role_mid": "Frontend Engineer (Mid-level)",
-      "role_senior": "Frontend Engineer (Senior)",
+      "role_name": "Software Engineer",
+      "role_junior": "Software Engineer (Junior)",
+      "role_mid": "Software Engineer (Mid-level)",
+      "role_senior": "Software Engineer (Senior)",
       "role_junior_sub": "Junior",
       "role_mid_sub": "Mid-level",
       "role_senior_sub": "Senior",

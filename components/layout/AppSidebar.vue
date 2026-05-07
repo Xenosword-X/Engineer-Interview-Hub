@@ -9,10 +9,18 @@ const router = useRouter()
 const { categories } = useCategories()
 
 const activeCategory = computed(() => (route.query.tag as string) ?? '')
-const activeDomain = computed(() => (route.query.domain as string) ?? '')
+
+const CATEGORY_DOMAIN_MAP: Record<string, string> = Object.entries(DOMAIN_CATEGORIES)
+  .flatMap(([domain, cats]) => (cats as string[]).map(cat => [cat, domain]))
+  .reduce((acc, [cat, domain]) => ({ ...acc, [cat]: domain }), {})
+
+const activeDomain = computed(() => {
+  if (route.query.domain) return route.query.domain as string
+  if (route.query.tag) return CATEGORY_DOMAIN_MAP[route.query.tag as string] ?? 'frontend'
+  return 'frontend'
+})
 
 const DOMAIN_TABS = [
-  { key: '', labelKey: 'domains.all' },
   { key: 'frontend', labelKey: 'domains.frontend' },
   { key: 'backend', labelKey: 'domains.backend' },
   { key: 'data-engineering', labelKey: 'domains.dataEngineering' },
@@ -20,12 +28,9 @@ const DOMAIN_TABS = [
 ] as const
 
 const visibleCategories = computed(() => {
-  if (!activeDomain.value) return categories.value
   const keys = DOMAIN_CATEGORIES[activeDomain.value] ?? []
   return categories.value.filter(c => keys.includes(c.key))
 })
-
-const total = computed(() => visibleCategories.value.reduce((s, c) => s + c.count, 0))
 
 function selectDomain(domainKey: string) {
   const query: Record<string, string> = {}
@@ -54,16 +59,6 @@ function selectDomain(domainKey: string) {
       </div>
 
       <p class="iv-sb-heading">{{ activeDomain ? t(`domains.${activeDomain === 'data-engineering' ? 'dataEngineering' : activeDomain}`) : 'Categories' }}</p>
-
-      <!-- All (within domain) -->
-      <NuxtLink
-        :to="activeDomain ? `${localePath('/questions')}?domain=${activeDomain}` : localePath('/questions')"
-        :class="['iv-sb-link', !activeCategory && 'iv-sb-link--active']"
-      >
-        <span class="iv-sb-dot iv-sb-dot--all" />
-        <span class="flex-1">{{ t('questions.all_categories') }}</span>
-        <span class="iv-sb-count">{{ total }}</span>
-      </NuxtLink>
 
       <!-- Per category -->
       <NuxtLink

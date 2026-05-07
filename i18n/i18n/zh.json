@@ -20,12 +20,12 @@
     "cta_practice_desc": "輸入你的答案，AI 即時分析精準度、指出缺漏、給出優化範例",
     "cta_practice_btn": "試用 AI 評分",
     "cta_interview_title": "AI 模擬面試",
-    "cta_interview_desc": "模擬完整前端面試流程，AI 擔任面試官，支援語音互動，結束後生成詳細評測報告",
+    "cta_interview_desc": "模擬完整面試流程，AI 擔任面試官，支援語音互動，結束後生成詳細評測報告",
     "cta_interview_btn": "立即開始面試",
     "hero_cta_primary": "瀏覽題庫",
     "hero_cta_secondary": "體驗 AI 面試",
     "seo_title": "軟體工程師 - 面試題庫 | 精選高頻面試題 + AI 即時評分",
-    "seo_description": "精選 180+ 道軟體工程師面試題，涵蓋 JavaScript、Vue、React、CSS、TypeScript、瀏覽器原理、Web Vitals、行為面試，搭配 AI 即時診斷答題品質，軟體工程師面試必備。"
+    "seo_description": "精選 180+ 道軟體工程師面試題，涵蓋 JavaScript、Vue、CSS、系統設計、資料庫、SQL、Pipeline、容器化、CI/CD、雲端架構，搭配 AI 即時診斷答題品質，前後端、資料工程、DevOps 面試必備。"
   },
   "questions": {
     "page_title": "面試題庫",
@@ -155,12 +155,12 @@
     "loading": "載入中...",
     "setup": {
       "title": "AI 模擬面試",
-      "subtitle": "走完完整 10-20 分鐘面試流程，模擬真實前端工程師面試",
+      "subtitle": "走完完整 10-20 分鐘面試流程，模擬真實軟體工程師面試",
       "role_label": "目標職位",
-      "role_name": "前端工程師",
-      "role_junior": "前端工程師（初階）",
-      "role_mid": "前端工程師（中階）",
-      "role_senior": "前端工程師（資深）",
+      "role_name": "軟體工程師",
+      "role_junior": "軟體工程師（初階）",
+      "role_mid": "軟體工程師（中階）",
+      "role_senior": "軟體工程師（資深）",
       "role_junior_sub": "初階",
       "role_mid_sub": "中階",
       "role_senior_sub": "資深",

@@ -9,6 +9,11 @@ const router = useRouter()
 const { filtered, activeTag, activeDomain, pending } = useQuestions()
 const { categories } = useCategories()
 
+const route = useRoute()
+if (!route.query.domain && !route.query.tag) {
+  await navigateTo({ path: localePath('/questions'), query: { domain: 'frontend' } }, { replace: true })
+}
+
 const siteUrl = useSiteUrl()
 
 useSeoMeta({
@@ -31,7 +36,6 @@ useHead({
 })
 
 const DOMAIN_TABS = [
-  { key: '', labelKey: 'domains.all' },
   { key: 'frontend', labelKey: 'domains.frontend' },
   { key: 'backend', labelKey: 'domains.backend' },
   { key: 'data-engineering', labelKey: 'domains.dataEngineering' },
