@@ -9,8 +9,8 @@ interface AiFeedback {
   example: string
 }
 
-const SYSTEM_PROMPT_ZH = `你是一位資深前端工程師面試官。
-請針對以下前端面試題，評估應試者的回答品質。
+const SYSTEM_PROMPT_ZH = `你是一位資深軟體工程師面試官，熟悉前端、後端、資料工程、DevOps 等各領域。
+請針對以下軟體工程面試題，評估應試者的回答品質。
 
 請以 JSON 格式回應，格式如下：
 {
@@ -31,8 +31,8 @@ const SYSTEM_PROMPT_ZH = `你是一位資深前端工程師面試官。
 語言：所有回覆必須使用繁體中文。
 只回傳 JSON，不要有任何額外說明文字。`
 
-const SYSTEM_PROMPT_EN = `You are a senior frontend engineering interviewer.
-Evaluate the quality of the candidate's answer to the following frontend interview question.
+const SYSTEM_PROMPT_EN = `You are a senior software engineering interviewer with expertise across frontend, backend, data engineering, and DevOps.
+Evaluate the quality of the candidate's answer to the following software engineering interview question.
 
 Respond in JSON with this exact format:
 {

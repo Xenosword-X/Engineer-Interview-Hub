@@ -42,7 +42,16 @@ function formatDate(iso: string) {
 }
 
 function roleShort(targetRole: string) {
-  return t(`interview.setup.role_${targetRole.split('-')[1]}`)
+  const lastDash = targetRole.lastIndexOf('-')
+  const roleType = lastDash !== -1 ? targetRole.slice(0, lastDash) : targetRole
+  const map: Record<string, string> = {
+    'frontend':         t('interviewRoles.frontend'),
+    'backend':          t('interviewRoles.backend'),
+    'data-engineering': t('interviewRoles.dataEngineering'),
+    'devops':           t('interviewRoles.devops'),
+    'fullstack':        t('interviewRoles.fullstack'),
+  }
+  return map[roleType] ?? roleType
 }
 </script>
 
