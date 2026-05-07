@@ -12,9 +12,10 @@ export default defineEventHandler(async (event) => {
   if (!userId) throw createError({ statusCode: 401, message: 'Unauthorized' })
 
   // 2. Validate body
-  const { locale, targetRole } = await readBody<{
+  const { locale, targetRole, selectedCategories: rawSelectedCategories } = await readBody<{
     locale: string
     targetRole: string
+    selectedCategories?: string[]
   }>(event)
 
   if (!['zh', 'en'].includes(locale)) throw createError({ statusCode: 400, message: 'Invalid locale' })
@@ -26,7 +27,10 @@ export default defineEventHandler(async (event) => {
   }
 
   const domain = getDomain(roleType)
-  const targetCategories = domain.categories
+  const domainCategorySet = new Set(domain.categories)
+  // Filter to only valid categories for this domain; fall back to full domain list if empty
+  const validSelected = (rawSelectedCategories ?? []).filter(c => domainCategorySet.has(c))
+  const targetCategories = validSelected.length > 0 ? validSelected : domain.categories
 
   const config = useRuntimeConfig()
   const userEmail: string = (user as any)?.email ?? ''

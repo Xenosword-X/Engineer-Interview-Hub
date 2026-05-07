@@ -1,7 +1,7 @@
 <!-- components/interview/SetupForm.vue -->
 <script setup lang="ts">
 const props = defineProps<{ loading?: boolean }>()
-const emit = defineEmits<{ start: [payload: { locale: string; targetRole: string }] }>()
+const emit = defineEmits<{ start: [payload: { locale: string; targetRole: string; selectedCategories: string[] }] }>()
 const { locale, t } = useI18n()
 
 // ── Step 1: role selection ──────────────────────────────────────────────────
@@ -45,7 +45,7 @@ const currentCategories = computed(() =>
 function handleStart() {
   if (!selectedRole.value) return
   const targetRole = `${selectedRole.value}-${selectedSeniority.value}`
-  emit('start', { locale: locale.value, targetRole })
+  emit('start', { locale: locale.value, targetRole, selectedCategories: selectedCategories.value })
 }
 
 const canStart = computed(() => !!selectedRole.value && selectedCategories.value.length > 0)

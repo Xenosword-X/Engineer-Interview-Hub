@@ -11,7 +11,7 @@ useHead({ title: t('interview.setup.title') })
 const user = useSupabaseUser()
 const isStarting = ref(false)
 
-async function handleStart(payload: { locale: string; targetRole: string }) {
+async function handleStart(payload: { locale: string; targetRole: string; selectedCategories: string[] }) {
   isStarting.value = true
   try {
     const result = await $fetch<{ sessionId: string; aiText: string; aiAudioBase64: string; phase: string; resumed: boolean }>('/api/interview/start', {
