@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
   try {
     const transcription = await openai.audio.transcriptions.create({
       file: audioFile,
-      model: 'gpt-4o-mini-transcribe',
+      model: 'gpt-4o-transcribe',
       language: locale === 'zh' ? 'zh' : 'en',
       prompt: getDomain(parseTargetRole(session.target_role).roleType).sttTerms.join(', '),
     })
