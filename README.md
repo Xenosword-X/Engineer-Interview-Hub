@@ -19,7 +19,7 @@
 | **題目詳解** | Markdown 渲染，自動產生側欄 TOC、麵包屑、上下題導覽、Callout 語法支援 |
 | **AI 單題評分** | 輸入答案後呼叫 GPT-4o-mini 給 0-100 精準度分數、列出缺漏要點、產生優化後範例答案 |
 | **AI 模擬面試** | 完整模擬工程師面試流程（intro → 行為題 → 4 題技術題 → wrapup），AI 擔任面試官，語音雙向互動，結束後生成評測報告 |
-| **語音作答** | 使用 `gpt-4o-mini-transcribe` 把中文/英文語音轉文字，AI 面試回覆透過 `tts-1` 合成語音播放 |
+| **語音作答** | 使用 `gpt-4o-transcribe` 把中文/英文語音轉文字，AI 面試回覆透過 `tts-1` 合成語音播放 |
 | **每日次數限制** | 免費額度預設 10 次/人/日，白名單 email 無限制（AI 評分與 AI 面試共用計數） |
 | **面試歷史** | 登入後可查看所有歷史面試記錄與詳細評測報告 |
 | **收藏功能** | 登入後可收藏題目，集中在「我的收藏」頁複習 |
@@ -67,7 +67,7 @@
 | Runtime | Nitro（Nuxt 內建，Node / Edge 皆可部署） |
 | Session | `h3` `useSession`（加密 cookie，`SESSION_SECRET` 簽章） |
 | 資料庫 SDK | `@nuxtjs/supabase` v2（`serverSupabaseServiceRole` / `serverSupabaseUser`） |
-| AI | `openai` SDK — `chat.completions` 呼叫 `gpt-4o-mini`、`audio.transcriptions` 呼叫 `whisper-1` |
+| AI | `openai` SDK — `chat.completions` 呼叫 `gpt-5.4-nano`、`audio.transcriptions` 呼叫 `gpt-4o-transcribe` |
 
 ### 資料層
 
@@ -175,7 +175,7 @@ interview_turns
 | GET | `/api/bookmarks` | 取得當前使用者的收藏 slug 清單 |
 | POST | `/api/bookmarks/toggle` | `{ slug, action: 'add' \| 'remove' }` |
 | POST | `/api/ai/evaluate` | `{ slug, questionText, answer }` → AI 評分結果 |
-| POST | `/api/ai/transcribe` | FormData(audio + locale) → Whisper 轉文字 |
+| POST | `/api/ai/transcribe` | FormData(audio + locale) → gpt-4o-transcribe 轉文字 |
 | POST | `/api/interview/start` | `{ locale, targetRole }` → 建立面試 session，返回開場語音 |
 | POST | `/api/interview/turn` | FormData(sessionId + audio) → STT → LLM → TTS，返回 AI 回覆語音 |
 | POST | `/api/interview/end` | `{ sessionId, abort? }` → 結束 session，生成評測報告（abort 則跳過） |
@@ -202,7 +202,7 @@ interview_turns
 | 服務 | 用途 | 費用 |
 |------|------|------|
 | **Supabase** | PostgreSQL 資料庫 + Google OAuth | 免費層（500MB DB / 50k MAU） |
-| **OpenAI** | `gpt-5.4-nano`（AI 評分 + 面試 LLM）、`gpt-4o-mini-transcribe`（STT，單題 + 面試共用）、`tts-1`（面試語音合成） | 按使用量計費，已設日次數限制 |
+| **OpenAI** | `gpt-5.4-nano`（AI 評分 + 面試 LLM）、`gpt-4o-transcribe`（STT，單題 + 面試共用）、`tts-1`（面試語音合成） | 按使用量計費，已設日次數限制 |
 | **Cloudflare Pages** | Static + Functions 部署 | 免費 |
 | **Google Cloud Console** | OAuth 2.0 憑證設定（供 Supabase 使用） | 免費 |
 
