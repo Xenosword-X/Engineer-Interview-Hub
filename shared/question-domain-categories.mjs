@@ -1,6 +1,6 @@
 /** @type {Record<string, string[]>} */
 export const DOMAIN_CATEGORIES = {
-  frontend: ['javascript', 'vue', 'css', 'typescript', 'html', 'web-vitals', 'browser', 'behavioral'],
+  frontend: ['javascript', 'vue', 'css', 'network-security', 'html', 'web-vitals', 'browser', 'behavioral'],
   backend: ['api-design', 'language', 'database', 'system-design', 'security', 'performance'],
   'data-engineering': ['sql-transformation', 'pipeline-orchestration', 'warehouse-modeling', 'batch-processing', 'stream-processing', 'data-quality-observability'],
   devops: ['containers-platform', 'infrastructure-as-code', 'delivery-automation', 'cloud-architecture', 'observability', 'reliability-sre'],
