@@ -50,7 +50,7 @@ function toggleLocale() {
     <button
       @click="toggleLocale"
       class="text-xs font-semibold text-[--color-primary] px-2.5 py-1.5 border border-[--color-primary-border] rounded-md bg-[--color-primary-light] hover:bg-indigo-100 transition-colors min-h-11 lg:min-h-9"
-      :aria-label="`Switch to ${otherLocale?.name}`"
+      :aria-label="`${t('nav.toggle_lang')} – Switch to ${otherLocale?.name}`"
     >
       {{ t('nav.toggle_lang') }}
     </button>

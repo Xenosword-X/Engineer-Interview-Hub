@@ -1,7 +1,4 @@
 /* assets/css/main.css */
-/* Google Fonts — must be first @import per CSS spec */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=DM+Serif+Display&display=swap');
-
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -14,7 +11,7 @@
   --color-bg:             #f8fafc;
   --color-text-primary:   #0f172a;
   --color-text-secondary: #374151;
-  --color-text-muted:     #64748b;   /* was #94a3b8 → 2.4:1 fail; now 4.35:1 ✅ */
+  --color-text-muted:     #475569;   /* slate-600; ~7:1 on white, passes WCAG AA */
   --color-border:         #e2e8f0;
   --color-border-hover:   #a5b4fc;
 
