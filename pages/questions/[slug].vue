@@ -253,8 +253,8 @@ useHead({
         v-html="renderedHtml"
       />
 
-      <!-- AI Practice section -->
-      <AiPractice :slug="slug" :question-text="question?.title ?? ''" />
+      <!-- AI Practice section — lazy loaded (below fold, heavy component) -->
+      <LazyAiPractice :slug="slug" :question-text="question?.title ?? ''" />
 
       <!-- Prev/Next -->
       <QuestionNav :prev="prevQuestion" :next="nextQuestion" />

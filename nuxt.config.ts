@@ -20,6 +20,16 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/@supabase')) return 'vendor-supabase'
+            if (id.includes('node_modules/openai')) return 'vendor-openai'
+          },
+        },
+      },
+    },
   },
 
   css: ['~/assets/css/main.css'],
@@ -59,6 +69,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: { lang: 'zh-TW' },
       link: [
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },

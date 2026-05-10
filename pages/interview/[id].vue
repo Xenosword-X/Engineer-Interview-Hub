@@ -81,8 +81,8 @@ const displaySummary = computed(() => localSummary.value ?? data.value?.summary 
       </div>
     </div>
 
-    <!-- Active interview -->
-    <InterviewStage
+    <!-- Active interview — lazy loaded (only shown after session starts) -->
+    <LazyInterviewStage
       v-else-if="view === 'active'"
       :session-id="sessionId"
       :initial-ai-text="initialAiText"
@@ -90,15 +90,15 @@ const displaySummary = computed(() => localSummary.value ?? data.value?.summary 
       @completed="handleCompleted"
     />
 
-    <!-- Summary -->
-    <InterviewSummary
+    <!-- Summary — lazy loaded (only shown after interview completes) -->
+    <LazyInterviewSummary
       v-else-if="view === 'summary' || localSummary !== null"
       :summary="displaySummary!"
       :session="data!.session"
     />
 
-    <!-- Aborted / error -->
-    <InterviewAborted
+    <!-- Aborted / error — lazy loaded (only shown on abort/error) -->
+    <LazyInterviewAborted
       v-else-if="view === 'aborted' || view === 'error'"
       :status="data!.session.status"
     />

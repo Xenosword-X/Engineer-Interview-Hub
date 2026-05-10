@@ -74,7 +74,7 @@ async function save() {
       {{ error }}
     </div>
 
-    <MarkdownEditor
+    <LazyMarkdownEditor
       :slug="slug"
       :category="category"
       :difficulty="difficulty"
