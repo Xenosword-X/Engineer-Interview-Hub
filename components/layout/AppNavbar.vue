@@ -20,7 +20,10 @@ function toggleLocale() {
     <div class="max-w-360 mx-auto h-full flex items-center px-4 lg:px-6 gap-3">
     <!-- Logo -->
     <NuxtLink :to="localePath('/')" class="flex items-center gap-2 shrink-0">
-      <img src="~/assets/img/LOGO.png" alt="Engineer Interview Hub" class="h-8 w-auto" />
+      <picture>
+          <source srcset="/img/LOGO-sm.webp" type="image/webp">
+          <img src="/img/LOGO.png" alt="Engineer Interview Hub" width="64" height="64" class="h-8 w-auto">
+        </picture>
       <span class="text-sm font-bold text-[--color-text-primary] hidden sm:block">Engineer Interview Hub</span>
     </NuxtLink>
 

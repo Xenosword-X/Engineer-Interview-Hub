@@ -9,10 +9,12 @@ export default defineNuxtConfig({
   future: { compatibilityVersion: 4 },
 
   modules: [
+    '@nuxt/image',
     '@nuxtjs/supabase',
     '@nuxtjs/i18n',
     '@nuxtjs/sitemap',
   ],
+
 
   components: {
     dirs: [{ path: '~/components', pathPrefix: false }],
@@ -73,7 +75,6 @@ export default defineNuxtConfig({
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=DM+Serif+Display&display=swap' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },

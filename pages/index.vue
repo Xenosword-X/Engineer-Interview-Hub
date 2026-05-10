@@ -64,6 +64,7 @@ useSeoMeta({
 
 useHead({
   link: [
+    { rel: 'preload', as: 'image', href: '/img/LOGO.webp', type: 'image/webp' },
     { rel: 'canonical', href: `${siteUrl}/${locale.value}/` },
     { rel: 'alternate', hreflang: 'zh-TW', href: `${siteUrl}/zh/` },
     { rel: 'alternate', hreflang: 'en-US', href: `${siteUrl}/en/` },
@@ -101,11 +102,18 @@ useHead({
           <span class="iv-hero-accent">{{ t('home.title_accent') }}</span>
         </h1>
 
-        <img
-          src="~/assets/img/LOGO.png"
-          alt="Engineer Interview Hub"
-          class="iv-hero-logo h-100 w-auto"
-        />
+        <picture>
+          <source srcset="/img/LOGO.webp" type="image/webp">
+          <img
+            src="/img/LOGO.png"
+            alt="Engineer Interview Hub"
+            width="400"
+            height="400"
+            class="iv-hero-logo w-auto"
+            fetchpriority="high"
+            decoding="async"
+          >
+        </picture>
 
         <p class="iv-hero-desc">{{ t('home.description') }}</p>
 
