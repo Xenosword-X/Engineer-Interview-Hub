@@ -2,8 +2,6 @@
 
 > 精選 180+ 道題目，涵蓋**前端 / 後端 / 資料工程 / DevOps** 四大領域、26 個分類，搭配 OpenAI 即時評分與完整 AI 模擬面試流程，幫你把「會答」練成「答好」。
 
-![Engineer Interview Hub OG image](public/og-image.png)
-
 🌐 **線上 Demo：** [https://engineer-interview-hub.pages.dev](https://engineer-interview-hub.pages.dev)
 
 ---
