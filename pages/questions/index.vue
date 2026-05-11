@@ -91,8 +91,8 @@ const pageTitle = computed(() => {
             :key="tab.key"
             :class="['text-[11px] font-semibold px-3 py-1 rounded-full border transition-colors',
               activeDomain === tab.key
-                ? 'bg-[--color-primary-light] text-[--color-primary] border-[--color-primary-border]'
-                : 'border-[--color-border] text-[--color-text-muted] bg-white']"
+                ? 'bg-primary-light text-primary border-primary-border'
+                : 'border-border text-text-muted bg-white']"
             @click="selectMobileDomain(tab.key)"
           >{{ t(tab.labelKey) }}</button>
         </div>
@@ -103,16 +103,16 @@ const pageTitle = computed(() => {
           <NuxtLink
             :to="activeDomain ? `${localePath('/questions')}?domain=${activeDomain}` : localePath('/questions')"
             :class="['text-[11px] font-semibold px-3 py-1.5 rounded-full border whitespace-nowrap transition-colors',
-              !activeTag ? 'bg-[--color-primary-light] text-[--color-primary] border-[--color-primary-border]'
-                         : 'border-[--color-border] text-[--color-text-secondary] bg-white']"
+              !activeTag ? 'bg-primary-light text-primary border-primary-border'
+                         : 'border-border text-text-secondary bg-white']"
           >{{ t('questions.all_categories') }}</NuxtLink>
           <NuxtLink
             v-for="cat in mobileCategories"
             :key="cat.key"
             :to="activeDomain ? `${localePath('/questions')}?domain=${activeDomain}&tag=${cat.key}` : `${localePath('/questions')}?tag=${cat.key}`"
             :class="['text-[11px] font-semibold px-3 py-1.5 rounded-full border whitespace-nowrap transition-colors',
-              activeTag === cat.key ? 'bg-[--color-primary-light] text-[--color-primary] border-[--color-primary-border]'
-                                    : 'border-[--color-border] text-[--color-text-secondary] bg-white']"
+              activeTag === cat.key ? 'bg-primary-light text-primary border-primary-border'
+                                    : 'border-border text-text-secondary bg-white']"
           >{{ t(`categories.${cat.key}`) }}</NuxtLink>
         </div>
       </div>
