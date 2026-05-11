@@ -2,6 +2,7 @@
   "nav": {
     "questions": "Questions",
     "ai_interview": "AI Interview",
+    "about": "About",
     "login": "Login",
     "toggle_lang": "ZH"
   },
@@ -98,7 +99,34 @@
   "footer": {
     "copyright": "Copyright © 2026 Wood All Rights Reserved · Engineer Interview Hub",
     "github": "GitHub",
+    "about": "About",
     "admin": "Admin"
+  },
+  "about": {
+    "page_title": "About",
+    "page_description": "The story behind Engineer Interview Hub: 180+ curated interview questions, AI mock interview, voice answers, and bilingual support — built independently by Wood.",
+    "hero_title": "About Engineer Interview Hub",
+    "hero_subtitle": "180+ curated questions paired with AI mock interviews and voice-based answers to sharpen your engineering interview skills",
+    "project_title": "Project Story",
+    "project_body_1": "While preparing for software engineering interviews, I couldn't find a platform that combined high-quality questions, instant AI scoring, and a full mock interview experience — all in one place. So I built one. From the question bank and admin CMS to the AI integration and voice-based interview flow, everything was independently designed and developed.",
+    "project_body_2": "Building this project gave me deep hands-on experience with Nuxt 3's SSR architecture, Supabase Auth and Row Level Security, OpenAI GPT-4o's streaming API, and Tailwind CSS v4. Going fully bilingual with i18n meant every feature had to work seamlessly in both Traditional Chinese and English.",
+    "tech_title": "Tech Stack",
+    "features_title": "Key Features",
+    "feature_questions": "180+ Curated Questions",
+    "feature_questions_desc": "Frontend, Backend, Data Engineering, and DevOps — 26 categories and counting",
+    "feature_ai": "AI Mock Interview",
+    "feature_ai_desc": "Full interview simulation powered by gpt-5.4-nano, with voice interaction and a detailed performance report",
+    "feature_bilingual": "Bilingual Support",
+    "feature_bilingual_desc": "Fully available in Traditional Chinese and English — switch anytime, seamlessly",
+    "feature_voice": "Voice Answers",
+    "feature_voice_desc": "Speak your answers like in a real interview — powered by OpenAI speech-to-text",
+    "author_title": "Developer",
+    "author_name": "Wood",
+    "author_bio": "A frontend engineer who transitioned from the MIS field, passionate about building practical projects deeply integrated with AI. Engineer Interview Hub is my personal contribution to improving software engineers' interview preparation — hoping to help more people land their dream offer.",
+    "contact_title": "Contact",
+    "contact_desc": "Feel free to reach out for question suggestions or if you spot any errors in the interview content.",
+    "github_label": "GitHub",
+    "email_label": "Email"
   },
   "error": {
     "not_found_title": "Page Not Found",

@@ -18,6 +18,10 @@ const { t } = useI18n()
           class="text-xs text-[--color-text-muted] hover:text-[--color-primary] transition-colors"
         >{{ t('footer.github') }}</a>
         <NuxtLink
+          to="/about"
+          class="text-xs text-[--color-text-muted] hover:text-[--color-primary] transition-colors"
+        >{{ t('footer.about') }}</NuxtLink>
+        <NuxtLink
           to="/admin/login"
           class="text-xs text-[--color-text-muted] hover:text-[--color-primary] transition-colors"
         >{{ t('footer.admin') }}</NuxtLink>

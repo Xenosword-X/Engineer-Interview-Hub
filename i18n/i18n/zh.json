@@ -2,6 +2,7 @@
   "nav": {
     "questions": "題庫",
     "ai_interview": "AI 面試",
+    "about": "關於",
     "login": "登入",
     "toggle_lang": "EN"
   },
@@ -98,7 +99,34 @@
   "footer": {
     "copyright": "Copyright © 2026 Wood All Rights Reserved · Engineer Interview Hub",
     "github": "GitHub",
+    "about": "關於",
     "admin": "後台管理"
+  },
+  "about": {
+    "page_title": "關於",
+    "page_description": "Engineer Interview Hub 的專案背景：180+ 道精選面試題、AI 模擬面試、語音答題、雙語支援，由獨立開發者 Wood 設計與實作。",
+    "hero_title": "關於 Engineer Interview Hub",
+    "hero_subtitle": "180+ 道精選題目，搭配 AI 模擬面試與語音答題，幫助工程師高效備考",
+    "project_title": "專案背景",
+    "project_body_1": "在準備工程師面試的過程中，我發現市場上缺乏一個同時具備高品質中文題目、即時 AI 評分和完整模擬面試功能的平台。於是決定自己動手建一個——從題庫設計、後台 CMS，到 AI 整合與語音互動，全程獨立開發完成。",
+    "project_body_2": "這個專案讓我深入實踐了 Nuxt 3 的 SSR 架構、Supabase 的 Auth 與 Row Level Security、OpenAI GPT-4o 的串流整合，以及 Tailwind CSS v4 的新語法。雙語化（i18n）確保所有功能能同時完整支援中英文使用者。",
+    "tech_title": "使用技術",
+    "features_title": "核心功能",
+    "feature_questions": "180+ 精選題目",
+    "feature_questions_desc": "涵蓋前端、後端、資料工程、DevOps 四大領域，26 個細分分類",
+    "feature_ai": "AI 模擬面試",
+    "feature_ai_desc": "gpt-5.4-nano 驅動的完整面試流程，即時語音互動與詳細評測報告",
+    "feature_bilingual": "雙語支援",
+    "feature_bilingual_desc": "繁體中文與英文完整支援，語言切換無縫",
+    "feature_voice": "語音答題",
+    "feature_voice_desc": "語音轉文字，模擬真實面試情境的問答體驗",
+    "author_title": "開發者",
+    "author_name": "Wood",
+    "author_bio": "由 MIS 領域轉職的前端工程師，在 AI 崛起的世代希望打造出實用且與 AI 深度結合的專案。Engineer Interview Hub 是我個人對於提升軟體工程師面試準備效率的貢獻，希望能幫助更多人成功拿到心儀的 offer。",
+    "contact_title": "聯絡",
+    "contact_desc": "若對題庫有什麼建議或面試遇到的錯誤都可與我聯絡",
+    "github_label": "GitHub",
+    "email_label": "Email"
   },
   "error": {
     "not_found_title": "找不到此頁面",
