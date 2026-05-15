@@ -1,6 +1,6 @@
 <!-- components/interview/InterviewSummary.vue -->
 <script setup lang="ts">
-import type { InterviewSession, InterviewSummary } from '~/server/utils/interview/types'
+import type { InterviewSession, InterviewSummary } from '@@/server/utils/interview/types'
 
 const props = defineProps<{ summary: InterviewSummary; session: InterviewSession }>()
 const { t } = useI18n()

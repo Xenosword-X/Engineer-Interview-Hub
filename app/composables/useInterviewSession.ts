@@ -1,5 +1,5 @@
 // composables/useInterviewSession.ts
-import type { Phase, InterviewTurn, InterviewSummary } from '~/server/utils/interview/types'
+import type { Phase, InterviewTurn, InterviewSummary } from '@@/server/utils/interview/types'
 
 type InterviewState = 'idle' | 'recording' | 'uploading' | 'ai_thinking' | 'ai_speaking' | 'error'
 

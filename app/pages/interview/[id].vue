@@ -1,6 +1,6 @@
 <!-- pages/interview/[id].vue -->
 <script setup lang="ts">
-import type { InterviewSession, InterviewSummary, InterviewTurn } from '~/server/utils/interview/types'
+import type { InterviewSession, InterviewSummary, InterviewTurn } from '@@/server/utils/interview/types'
 
 definePageMeta({ layout: 'home' })
 

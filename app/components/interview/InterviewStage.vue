@@ -1,6 +1,6 @@
 <!-- components/interview/InterviewStage.vue -->
 <script setup lang="ts">
-import type { InterviewSummary } from '~/server/utils/interview/types'
+import type { InterviewSummary } from '@@/server/utils/interview/types'
 
 const props = defineProps<{
   sessionId: string

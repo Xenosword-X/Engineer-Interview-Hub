@@ -1,6 +1,6 @@
 <!-- components/interview/InterviewStatusBar.vue -->
 <script setup lang="ts">
-import type { Phase } from '~/server/utils/interview/types'
+import type { Phase } from '@@/server/utils/interview/types'
 
 defineProps<{
   phase: Phase
