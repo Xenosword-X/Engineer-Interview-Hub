@@ -1,5 +1,5 @@
 // composables/useQuestions.ts
-import { DOMAIN_CATEGORIES } from '~/shared/question-domain-categories.mjs'
+import { DOMAIN_CATEGORIES } from '@@/shared/question-domain-categories.mjs'
 
 export interface QuestionMeta {
   id: string

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getDomain } from '~/server/utils/interview/domains/index'
+import { getDomain } from '../../../server/utils/interview/domains/index'
 
 describe('getDomain', () => {
   it('returns frontend domain for roleType frontend', () => {

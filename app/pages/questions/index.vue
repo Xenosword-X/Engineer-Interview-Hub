@@ -1,6 +1,6 @@
 <!-- pages/questions/index.vue -->
 <script setup lang="ts">
-import { DOMAIN_CATEGORIES } from '~/shared/question-domain-categories.mjs'
+import { DOMAIN_CATEGORIES } from '@@/shared/question-domain-categories.mjs'
 
 const { t, locale } = useI18n()
 const localePath = useLocalePath()

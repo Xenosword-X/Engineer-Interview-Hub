@@ -1,9 +1,9 @@
 // server/api/interview/start.post.ts
 import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
 import OpenAI from 'openai'
-import { isWhitelisted, isQuotaExceeded } from '~/server/utils/interview/quotaCheck'
-import { getDomain } from '~/server/utils/interview/domains/index'
-import { parseTargetRole } from '~/server/utils/interview/parseTargetRole'
+import { isWhitelisted, isQuotaExceeded } from '@@/server/utils/interview/quotaCheck'
+import { getDomain } from '@@/server/utils/interview/domains/index'
+import { parseTargetRole } from '@@/server/utils/interview/parseTargetRole'
 
 export default defineEventHandler(async (event) => {
   // 1. Auth

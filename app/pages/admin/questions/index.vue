@@ -1,6 +1,6 @@
 <!-- pages/admin/questions/index.vue -->
 <script setup lang="ts">
-import { getCategoriesForDomain, getCategoryLabel } from '~/shared/question-domain-categories.mjs'
+import { getCategoriesForDomain, getCategoryLabel } from '@@/shared/question-domain-categories.mjs'
 
 definePageMeta({ layout: 'admin' })
 defineI18nRoute(false)

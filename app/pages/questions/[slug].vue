@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { Marked, Renderer } from 'marked'
 import type { QuestionItem, QuestionMeta } from '~/composables/useQuestions'
-import { DOMAIN_CATEGORIES } from '~/shared/question-domain-categories.mjs'
+import { DOMAIN_CATEGORIES } from '@@/shared/question-domain-categories.mjs'
 
 const CATEGORY_DOMAIN_MAP: Record<string, string> = Object.entries(DOMAIN_CATEGORIES)
   .flatMap(([domain, cats]) => (cats as string[]).map(cat => [cat, domain]))

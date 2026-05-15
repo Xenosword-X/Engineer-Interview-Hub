@@ -43,6 +43,7 @@ export default defineNuxtConfig({
       { code: 'en', language: 'en-US', name: 'English',   file: 'en.json' },
     ],
     langDir: 'i18n/',
+    restructureDir: false,
     detectBrowserLanguage: false,
   },
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseTargetRole } from '~/server/utils/interview/parseTargetRole'
+import { parseTargetRole } from '../../../server/utils/interview/parseTargetRole'
 
 describe('parseTargetRole', () => {
   it('parses frontend-junior', () => {

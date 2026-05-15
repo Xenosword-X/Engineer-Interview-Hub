@@ -15,7 +15,7 @@ beforeAll(async () => {
     useSupabaseUser: () => userRef,
   })
 
-  authMiddleware = (await import('../../middleware/auth.global')).default
+  authMiddleware = (await import('../../app/middleware/auth.global')).default
 })
 
 describe('auth.global middleware', () => {

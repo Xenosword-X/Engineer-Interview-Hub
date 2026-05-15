@@ -1,7 +1,7 @@
 // server/api/ai/evaluate.post.ts
 import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
 import OpenAI from 'openai'
-import { isWhitelisted } from '~/server/utils/interview/quotaCheck'
+import { isWhitelisted } from '@@/server/utils/interview/quotaCheck'
 
 interface AiFeedback {
   accuracy: { score: number; summary: string }

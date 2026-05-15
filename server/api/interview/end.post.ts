@@ -1,8 +1,8 @@
 // server/api/interview/end.post.ts
 import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
 import OpenAI from 'openai'
-import { buildSummaryPromptZh, buildSummaryPromptEn } from '~/server/utils/interview/prompts'
-import { parseSummaryResponse } from '~/server/utils/interview/schemas'
+import { buildSummaryPromptZh, buildSummaryPromptEn } from '@@/server/utils/interview/prompts'
+import { parseSummaryResponse } from '@@/server/utils/interview/schemas'
 
 export default defineEventHandler(async (event) => {
   const user = await serverSupabaseUser(event)

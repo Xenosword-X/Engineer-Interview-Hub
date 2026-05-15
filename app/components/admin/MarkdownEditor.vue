@@ -1,7 +1,7 @@
 <!-- components/admin/MarkdownEditor.vue -->
 <script setup lang="ts">
 import { Marked, Renderer } from 'marked'
-import { DOMAIN_CATEGORIES } from '~/shared/question-domain-categories.mjs'
+import { DOMAIN_CATEGORIES } from '@@/shared/question-domain-categories.mjs'
 
 interface LocaleContent {
   title: string

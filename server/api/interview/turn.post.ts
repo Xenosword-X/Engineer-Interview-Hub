@@ -1,14 +1,14 @@
 // server/api/interview/turn.post.ts
 import { serverSupabaseServiceRole, serverSupabaseUser } from '#supabase/server'
 import OpenAI from 'openai'
-import { buildTurnMessages } from '~/server/utils/interview/buildTurnMessages'
-import { getDomain } from '~/server/utils/interview/domains/index'
-import { parseTargetRole } from '~/server/utils/interview/parseTargetRole'
-import { pickQuestionPool } from '~/server/utils/interview/pickQuestionPool'
-import { validateAndCoerce, planUpcomingTurn } from '~/server/utils/interview/validateAiResponse'
-import { parseTurnResponse } from '~/server/utils/interview/schemas'
-import { isSilentTranscript, FALLBACK_REPLIES } from '~/server/utils/interview/applyFallback'
-import type { InterviewTurn } from '~/server/utils/interview/types'
+import { buildTurnMessages } from '@@/server/utils/interview/buildTurnMessages'
+import { getDomain } from '@@/server/utils/interview/domains/index'
+import { parseTargetRole } from '@@/server/utils/interview/parseTargetRole'
+import { pickQuestionPool } from '@@/server/utils/interview/pickQuestionPool'
+import { validateAndCoerce, planUpcomingTurn } from '@@/server/utils/interview/validateAiResponse'
+import { parseTurnResponse } from '@@/server/utils/interview/schemas'
+import { isSilentTranscript, FALLBACK_REPLIES } from '@@/server/utils/interview/applyFallback'
+import type { InterviewTurn } from '@@/server/utils/interview/types'
 
 const MAX_TURNS = 15
 const MAX_SESSION_MINUTES = 45
