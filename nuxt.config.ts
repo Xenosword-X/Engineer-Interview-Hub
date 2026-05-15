@@ -6,7 +6,6 @@ const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL ?? 'https://engineer-interview
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  future: { compatibilityVersion: 4 },
 
   modules: [
     '@nuxt/image',
