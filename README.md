@@ -51,7 +51,7 @@
 
 | 類別 | 技術 |
 |------|------|
-| 框架 | **Nuxt 3**（`compatibilityVersion: 4`，SSR 預設） |
+| 框架 | **Nuxt 4**（`compatibilityVersion: 4`，SSR 預設） |
 | 語言 | TypeScript |
 | UI | **Tailwind CSS v4**（`@tailwindcss/vite`）+ 自訂 CSS 變數 |
 | 排版 | `@tailwindcss/typography`（題目詳解頁） |

@@ -109,7 +109,7 @@
     "hero_subtitle": "180+ 道精選題目，搭配 AI 模擬面試與語音答題，幫助工程師高效備考",
     "project_title": "專案背景",
     "project_body_1": "在準備工程師面試的過程中，我發現市場上缺乏一個同時具備高品質中文題目、即時 AI 評分和完整模擬面試功能的平台。於是決定自己動手建一個——從題庫設計、後台 CMS，到 AI 整合與語音互動，全程獨立開發完成。",
-    "project_body_2": "這個專案讓我深入實踐了 Nuxt 3 的 SSR 架構、Supabase 的 Auth 與 Row Level Security、OpenAI GPT-4o 的串流整合，以及 Tailwind CSS v4 的新語法。雙語化（i18n）確保所有功能能同時完整支援中英文使用者。",
+    "project_body_2": "這個專案讓我深入實踐了 Nuxt 4 的 SSR 架構、Supabase 的 Auth 與 Row Level Security、OpenAI GPT-4o 的串流整合，以及 Tailwind CSS v4 的新語法。雙語化（i18n）確保所有功能能同時完整支援中英文使用者。",
     "tech_title": "使用技術",
     "features_title": "核心功能",
     "feature_questions": "180+ 精選題目",

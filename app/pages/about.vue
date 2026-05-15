@@ -9,7 +9,7 @@ useHead({
 })
 
 const techStack = [
-  { name: 'Nuxt 3', color: 'bg-green-100 text-green-800 border-green-200' },
+  { name: 'Nuxt 4', color: 'bg-green-100 text-green-800 border-green-200' },
   { name: 'TypeScript', color: 'bg-blue-100 text-blue-800 border-blue-200' },
   { name: 'Vue 3', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
   { name: 'Tailwind CSS v4', color: 'bg-cyan-100 text-cyan-800 border-cyan-200' },

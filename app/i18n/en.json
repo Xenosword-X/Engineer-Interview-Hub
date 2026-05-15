@@ -109,7 +109,7 @@
     "hero_subtitle": "180+ curated questions paired with AI mock interviews and voice-based answers to sharpen your engineering interview skills",
     "project_title": "Project Story",
     "project_body_1": "While preparing for software engineering interviews, I couldn't find a platform that combined high-quality questions, instant AI scoring, and a full mock interview experience — all in one place. So I built one. From the question bank and admin CMS to the AI integration and voice-based interview flow, everything was independently designed and developed.",
-    "project_body_2": "Building this project gave me deep hands-on experience with Nuxt 3's SSR architecture, Supabase Auth and Row Level Security, OpenAI GPT-4o's streaming API, and Tailwind CSS v4. Going fully bilingual with i18n meant every feature had to work seamlessly in both Traditional Chinese and English.",
+    "project_body_2": "Building this project gave me deep hands-on experience with Nuxt 4's SSR architecture, Supabase Auth and Row Level Security, OpenAI GPT-4o's streaming API, and Tailwind CSS v4. Going fully bilingual with i18n meant every feature had to work seamlessly in both Traditional Chinese and English.",
     "tech_title": "Tech Stack",
     "features_title": "Key Features",
     "feature_questions": "180+ Curated Questions",
