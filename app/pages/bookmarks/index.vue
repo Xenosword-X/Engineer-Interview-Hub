@@ -10,7 +10,7 @@ const siteUrl = useSiteUrl()
 const { data: bookmarkSlugs, refresh, pending } = await useAsyncData(
   'my-bookmarks',
   () => $fetch<string[]>('/api/bookmarks'),
-  { server: false, getCachedData: () => null }
+  { server: false, getCachedData: () => undefined }
 )
 
 const { data: allQuestions } = await useAsyncData(
